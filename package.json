@@ -1,10 +1,9 @@
 {
-  "name": "dreamdex-perps-market-monitor",
+  "name": "dreamdex-perps-stale-close-repro",
   "version": "1.0.0",
-  "description": "Read-only DreamDEX Perps market monitor for Somnia Hideki testnet",
+  "description": "Deterministic reproduction of a stale-close position reversal in dreamdex-bot-kit",
   "type": "module",
   "scripts": {
-    "monitor": "node --import tsx src/monitor.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "check": "npm run typecheck && npm test"
@@ -14,12 +13,11 @@
     "somnia",
     "perpetuals",
     "markets-sdk",
-    "market-monitor"
+    "bug-reproduction"
   ],
   "license": "MIT",
   "dependencies": {
-    "@somnia-chain/markets-sdk": "0.32.1",
-    "dotenv": "16.6.1",
+    "@somnia-chain/markets-sdk": "0.31.0",
     "viem": "2.38.5"
   },
   "devDependencies": {

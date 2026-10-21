@@ -1,67 +1,44 @@
-# DreamDEX Perps Market Monitor
+# DreamDEX Perps stale-close reproduction
 
-A small, read-only TypeScript monitor built with the official
-[`@somnia-chain/markets-sdk`](https://www.npmjs.com/package/@somnia-chain/markets-sdk).
-It discovers live DreamDEX perpetual markets on Somnia Hideki testnet and reports:
+This repository contains a deterministic, no-network reproduction of a position-reversal
+bug in `dreamdex-bot-kit`'s Perps close flow.
 
-- live mark and index prices, with stale-mark detection;
-- open interest and funding per protocol-defined window;
-- best bid/ask and spread;
-- next funding time; and
-- optional cross-margin health for a public account address.
+`closePosition()` snapshots a close quantity, performs later asynchronous reads, and then
+submits that original quantity as a normal market order. If the position is reduced during
+that window, the stale order can cross through zero and create a new position in the
+opposite direction.
 
-It is an independent developer project, not an official DreamDEX application.
+The reproduction uses the official `@somnia-chain/markets-sdk` order type and the same
+operation ordering as the affected implementation. It sends no transaction and requires
+no wallet.
 
-## Read-only by design
-
-The monitor cannot trade. It accepts no private key, constructs no signer, and calls only
-SDK read methods. `OWNER_ADDRESS` is optional and must be a public address. Never put a seed
-phrase or private key in this project.
-
-## Run
-
-Requirements: Node.js 22+.
+## Reproduce
 
 ```bash
 npm install
-cp .env.example .env
-npm run monitor
+npm test
 ```
 
-Machine-readable output:
+Expected regression-test result:
 
-```bash
-npm run monitor -- --json
+```text
+initial position       +10 long
+concurrent reduction    -8 sell
+live position           +2 long
+stale close order      -10 sell
+final position           -8 short  <-- unintended reversal
 ```
 
-To include account health, set a public address in `.env`:
+See [REPORT.md](REPORT.md) for affected code, impact, root cause, and remediation.
 
-```dotenv
-OWNER_ADDRESS=0xYourPublicAddress
-```
+## Scope
 
-To inspect one perp, set its SDK symbol after running once to list the discovered symbols:
+- Upstream: [`somnia-chain/dreamdex-bot-kit`](https://github.com/somnia-chain/dreamdex-bot-kit)
+- Affected commit verified: `25798660bbe4674a6f83a960b202852896e2fed4`
+- Verification date: 21 October 2026
+- Suggested severity: **Major**
 
-```dotenv
-PERP_SYMBOL=WBTC/USDso:USDso
-```
-
-## Verify
-
-```bash
-npm run check
-```
-
-The test suite verifies funding annualization, maintenance-health buckets, and order-book
-spread math. CI runs type-checking and tests on every push and pull request.
-
-## Design notes
-
-- Funding is annualized using each pool's live `fundingWindowSec`; it is not hard-coded.
-- A stale mark is never presented as a valid zero price.
-- The contract-provided `marginStatus` is shown separately from the monitor's conservative
-  display bucket.
-- This repository intentionally contains no wallet secrets.
+This is a local state-machine reproduction for maintainers. Do not test it with real funds.
 
 ## License
 

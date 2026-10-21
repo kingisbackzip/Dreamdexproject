@@ -1,0 +1,31 @@
+{
+  "name": "dreamdex-perps-market-monitor",
+  "version": "1.0.0",
+  "description": "Read-only DreamDEX Perps market monitor for Somnia Hideki testnet",
+  "type": "module",
+  "scripts": {
+    "monitor": "node --import tsx src/monitor.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm test"
+  },
+  "keywords": [
+    "dreamdex",
+    "somnia",
+    "perpetuals",
+    "markets-sdk",
+    "market-monitor"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@somnia-chain/markets-sdk": "0.32.1",
+    "dotenv": "16.6.1",
+    "viem": "2.38.5"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.0",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
+  }
+}

@@ -1,0 +1,16 @@
+Retrieved 2026-11-01 from https://somnia-platform-docs.vercel.app/markets/somnia-markets/contracts
+
+Quantize in integers.   getOrderBookParameters()  returns  tickSize ,
+ lotSize , and  minQuantity  in raw token units; off-grid values revert
+ InvalidPrice  /  InvalidQuantity . 
+ builder  /  builderFeeBpsTimes1k  attribute the order to a
+routing/builder frontend and pay it a per-order fee (basis-po
+
+struct OrderBookParameters {
+    uint256 tickSize;      // min price increment, raw quote/collateral units
+    uint256 minQuantity;   // min order quantity, raw base units
+    uint256 lotSize;       // min quantity increment, raw base units
+}
+
+interface IOrderBook {
+    event OrderPlaced(OrderId ind

@@ -1,0 +1,21 @@
+(node:14) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ R2-03: candle fold excludes partial first hour (1.821636ms)
+✔ R2-04: exact shipped time-in-force branch selects LIMIT for lowercase ioc (3.21279ms)
+✔ R2-05: invalid rounding direction falls down (0.304187ms)
+✔ R2-06: NaN slippage passes deep-book guard (0.199022ms)
+✔ R2-07: positive subsecond funding window reaches division by zero (0.668863ms)
+✔ R2-08: max percentage drawdown overwritten by larger absolute loss (0.388861ms)
+✔ R2-09: actual CLI parser silently ignores misspelled fee flag (3.809642ms)
+✔ R2-11: fee-losing round trip counted as win (0.285289ms)
+✔ R2-17: invalid buy-side string walks bids (0.289786ms)
+✔ R2-18: unsigned plain-order builder accepts fee without address, stop builder rejects (172.633856ms)
+✔ R2-19: real doctor main resolves successfully when every market read fails (3.31063ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 508.884988

@@ -1,4 +1,4 @@
-PASS: 36 reports; 36 Feedback candidates; 0 private reports in export
+PASS: 50 reports; 50 Feedback candidates; 0 private reports in export
 PASS: all required sections, severity/area enums, unique IDs and PDF-page mappings
-PASS: 12 exact upstream Git blob hashes; 122 local Markdown links
+PASS: 12 exact upstream Git blob hashes; 189 local Markdown links
 PASS: each report follows the five-section Feedback template

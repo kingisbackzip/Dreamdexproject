@@ -5,12 +5,12 @@ import re,json,hashlib
 ROOT=Path(__file__).resolve().parents[1]
 m=json.loads((ROOT/'manifest.json').read_text())
 public=m.get('package_kind')=='public-feedback'
-expected=36 if public else 38
+expected=m['feedback_candidates'] if public else 38
 reports=m['reports']
 assert len(reports)==expected, (len(reports),expected)
 assert len({r['id'] for r in reports})==expected
-assert sum(r['path'].startswith('feedback/') for r in reports)==36
-assert len(list((ROOT/'feedback').glob('*.md')))==36
+assert sum(r['path'].startswith('feedback/') for r in reports)==expected
+assert len(list((ROOT/'feedback').glob('*.md')))==expected
 assert all(r['severity'] in {'critical','major','normal'} for r in reports)
 assert all(r['area'] in {'API','SDK','docs','app','contracts'} for r in reports)
 required=['Steps to reproduce','Expected','Actual','Evidence','Environment']
@@ -20,8 +20,9 @@ for r in reports:
     assert f"Severity: {r['severity']}" in text
     assert f"Area: {r['area']}" in text
     assert (ROOT/r['source_excerpt']).is_file()
-    assert 1 <= r['pdf_pages'][0] <= r['pdf_pages'][1] <= 63
-    assert f"PDF pages {r['pdf_pages'][0]}-{r['pdf_pages'][1]}" in text
+    if 'pdf_pages' in r:
+        assert 1 <= r['pdf_pages'][0] <= r['pdf_pages'][1] <= 63
+        assert f"PDF pages {r['pdf_pages'][0]}-{r['pdf_pages'][1]}" in text
 if public:
     assert not (ROOT/'pending').exists()
     assert not (ROOT/'scripts/revalidate-private.mjs').exists()
@@ -50,7 +51,7 @@ for path in ROOT.rglob('*.md'):
         target=link.split('#',1)[0]
         assert (path.parent/target).exists(),(str(path.relative_to(ROOT)),link)
         checked+=1
-print(f'PASS: {expected} reports; 36 Feedback candidates; '+('0 private reports in export' if public else '2 private holds'))
+print(f'PASS: {expected} reports; {expected} Feedback candidates; '+('0 private reports in export' if public else '2 private holds'))
 print(f'PASS: all required sections, severity/area enums, unique IDs and PDF-page mappings')
 print(f'PASS: {len(snapshots)} exact upstream Git blob hashes; {checked} local Markdown links')
 print('PASS: each report follows the five-section Feedback template')

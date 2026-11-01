@@ -1,13 +1,13 @@
-(node:14) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(node:29) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-✔ 004: actual loadEnv stops at nearest file; parent-only control loads root (46.781625ms)
-✔ 019: real NETWORKS initializer captures defaults before env update; pre-import control honors overrides (2.797667ms)
-✔ 022: actual PERP_SIDE expression maps sell/bear to long; SHORT control stays short (7.208459ms)
-✔ 023: actual envNum accepts bad percentage ranges and actual bracket math inverts prices (2.09929ms)
-✔ 025: actual toFillSide maps BUY/long/unknown to sell; canonical buy control passes (1.047873ms)
-✔ 027: actual parseTs rejects fractional seconds; integer and ISO controls pass (1.649418ms)
-✔ 028: real strategy with synthetic dropped stop logs one armed leg below stop; no fallback close or rearm (4.128947ms)
-✔ 029: real guard with BTC-only filter hides synthetic ETH health; unfiltered control closes (4.840854ms)
+✔ 004: actual loadEnv stops at nearest file; parent-only control loads root (37.751259ms)
+✔ 019: real NETWORKS initializer captures defaults before env update; pre-import control honors overrides (3.136394ms)
+✔ 022: actual PERP_SIDE expression maps sell/bear to long; SHORT control stays short (4.639014ms)
+✔ 023: actual envNum accepts bad percentage ranges and actual bracket math inverts prices (2.080461ms)
+✔ 025: actual toFillSide maps BUY/long/unknown to sell; canonical buy control passes (1.319671ms)
+✔ 027: actual parseTs rejects fractional seconds; integer and ISO controls pass (1.773429ms)
+✔ 028: real strategy with synthetic dropped stop logs one armed leg below stop; no fallback close or rearm (8.680434ms)
+✔ 029: real guard with BTC-only filter hides synthetic ETH health; unfiltered control closes (5.72384ms)
 ℹ tests 8
 ℹ suites 0
 ℹ pass 8
@@ -15,4 +15,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 191.1177
+ℹ duration_ms 162.218424

@@ -1,6 +1,6 @@
 # dreamDEX Perps Feedback
 
-36 feedback reports for the [dreamDEX Perps Builder Bounty](https://dorahacks.io/hackathon/dreamdex-perps-bounty/detail), covering the SDK, bot kit, documentation and application.
+50 feedback reports for the [dreamDEX Perps Builder Bounty](https://dorahacks.io/hackathon/dreamdex-perps-bounty/detail), covering the SDK, bot kit, documentation and application.
 
 Each issue has its own Markdown file in [`feedback/`](feedback/) using the required format: severity, area, steps to reproduce, expected behavior, actual behavior, evidence and environment.
 
@@ -44,6 +44,20 @@ Each issue has its own Markdown file in [`feedback/`](feedback/) using the requi
 | 036 | [MIGRATING.md links to an absent packaged changelog and stale release status](feedback/036-pkg-05-migrating-links-missing-changelog.md) | normal | docs | supplied-evidence-only |
 | 037 | [fromHuman number rounding differs from the documented decimal rounding rule](feedback/037-sdk2-01-fromhuman-number-not-half-away-from-zero.md) | normal | SDK | supplied-evidence-only |
 | 038 | [Balance and amount helpers silently ignore invalid quantum values](feedback/038-sdk2-02-floor-ceil-quantum-invalid-silently-ignored.md) | normal | SDK | supplied-evidence-only |
+| 039 | [Order-book parameter prose swaps minQuantity and lotSize](feedback/039-docs-orderbook-field-order.md) | normal | docs | source-verified |
+| 040 | [Trailing-24h candle statistics omit the partial first hour](feedback/040-sdk-24h-partial-hour.md) | normal | SDK | offline-reproduced-limited |
+| 041 | [Lowercase timeInForce silently selects a GTC limit order](feedback/041-sdk-time-in-force-case.md) | normal | SDK | offline-reproduced-limited |
+| 042 | [Unknown grid-rounding direction silently rounds down](feedback/042-sdk-grid-direction.md) | normal | SDK | offline-reproduced-limited |
+| 043 | [Quote helpers silently accept invalid slippage and trade-side values](feedback/043-sdk-nan-slippage.md) | normal | SDK | offline-reproduced-limited |
+| 044 | [Funding helper guards accept windows that cause division by zero](feedback/044-sdk-funding-window-guards.md) | normal | SDK | offline-reproduced-limited |
+| 045 | [Maximum percentage drawdown is overwritten by a larger absolute drawdown](feedback/045-backtest-drawdown-percent.md) | normal | SDK | offline-reproduced-limited |
+| 046 | [Backtest CLI silently ignores misspelled top-level flags](feedback/046-backtest-unknown-cli-flags.md) | normal | SDK | offline-reproduced-limited |
+| 047 | [Backtest win rate counts fee-losing round trips as wins](feedback/047-backtest-win-rate-fees.md) | normal | SDK | offline-reproduced-limited |
+| 048 | [DreamFly runner defaults to mainnet while Settings defaults to testnet](feedback/048-dreamfly-network-default.md) | normal | SDK | source-verified |
+| 049 | [Reactivity JSDoc contradicts the documented WebSocket endpoint selection](feedback/049-docs-reactivity-websocket.md) | normal | docs | source-verified |
+| 051 | [Perp order builder accepts a fee without a builder address](feedback/051-sdk-builder-fee-validation.md) | normal | SDK | offline-reproduced-limited |
+| 052 | [Perp doctor completes successfully after every market read fails](feedback/052-perp-doctor-exit-status.md) | normal | SDK | offline-reproduced-limited |
+| 053 | [Indexer hooks expose previous-argument data as settled after arguments change](feedback/053-react-query-stale-arguments.md) | normal | SDK | source-verified |
 
 ## Reproduce
 
@@ -55,6 +69,8 @@ node --test scripts/reproduce-offline.mjs
 ```
 
 No dependency installation or wallet is needed for these checks. Eight reports have passing offline reproductions: 004, 019, 022, 023, 025, 027, 028 and 029. Other results are attributed to the supplied source report. See [test boundaries](VALIDATION.md) and [evidence provenance](evidence/README.md).
+
+The additional batch includes 11 passing offline checks and four source/documentation checks. Install the pinned dependencies with `npm install --ignore-scripts --no-audit --no-fund`, then run `node --test scripts/reproduce-round2.mjs`. See [verification details](evidence/round2/README.md).
 
 The optional `scripts/reproduce-sdk-units.mjs` checks reports 037 and 038 using the dependencies in `package.json`; it has not been run in this validation pass.
 

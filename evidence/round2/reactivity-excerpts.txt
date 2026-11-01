@@ -1,0 +1,16 @@
+SDK 0.32.1 dist/reactivity/index.d.ts:100-104
+/**
+ *  Build a reactivity client on the markets client's own WebSocket — the socket
+ *  is already open and already pointed at the right node, and `watch` needs a
+ *  WebSocket transport.
+ *
+
+docs/REACTIVITY.md:37
+| `createReactivity(client, { wallet? })` | builds the reactivity client from the markets client's viem client: reads and receipt waits reuse it; `watch` opens its own WebSocket from `chain.rpcUrls.default.webSocket[0]`                       |
+
+> **Use a chain definition from [`/chains`](./CHAINS.md).** Upstream's `watch`
+> opens its own socket with viem's `webSocket()` _without a URL_, so the endpoint
+> comes from `chain.rpcUrls.default.webSocket[0]`. viem's own `somniaTestnet` has
+> no WebSocket entry, so `watch` fails on it; every definition in
+> `@somnia-chain/markets-sdk/chains` carries one.
+

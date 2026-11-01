@@ -2,19 +2,10 @@
 
 Severity: normal
 Area: docs
-Validation status: user-supplied evidence only; not rerun in this packaging pass
-Disclosure: ordinary feedback candidate
-Source item: 16; PDF pages 31-32
-
-## Summary and impact
-
-Stop-registry default configuration differs from documented deployment values. The detailed behavior and impact below were reported in the supplied PDF; production impact and payout are not established by this package.
 
 ## Steps to reproduce
 
-### Procedure recorded in the source PDF
-
-Historical `scripts/`, `scratch/`, `candidates/` and raw-log paths in this procedure were not supplied. They identify the original research workspace, not executable files in this repository. Use the included replacement check where provided; otherwise recreate the stated read-only call or inspect the pinned source before relying on the claim.
+### Original reproduction procedure
 
 For a new check, restrict view calls to Shannon testnet 50312. Mainnet observations in the excerpt are historical supplied evidence and were not repeated here.
 
@@ -44,12 +35,16 @@ The table matches the deployed registries. The page calls somiPaymentPerOrder th
 
 All 7 registries the page lists return somiPaymentPerOrder = 0.5 SOMI (5× the documented 0.1) and gasBufferBps = 3000 (the docs say 5000). slippageToleranceBps = 500 and minStopDistanceBps = 0 do match. No registry runs the documented “default”. If a developer sends the documented 0.1 SOMI, the call reverts with InsufficientSomiPayment() (0xfa0d8bfd), since under-payment and over-payment both revert. An eth_call on the Shannon SOMI registry with exactly somiPaymentPerOrder() showed the registry read the 0.5 SOMI value (see doc2-02).
 
+This item concerns adjacent spot, CCXT or bot-tool documentation/behavior. Eligibility under a perps-focused competition needs organizer confirmation. The source PDF sometimes uses a Hideki boilerplate environment for a Shannon-only operation; the actual network described in the procedure takes precedence.
+
 ## Evidence
 
-- [Original item excerpt](../evidence/pdf/016.txt) from PDF pages 31-32. This is extracted report text, not an original raw execution log.
+Results below are from the source report; not independently rerun.
+
+- [Original item excerpt](../evidence/pdf/016.txt) from PDF pages 31-32. 
 - [Source provenance and limitations](../evidence/README.md).
 
-### Evidence as supplied in the PDF
+### Recorded results
 
 ```text
 Docs page (fetched live 2026-10-31 03:58 UTC), https://app.testnet.dreamdex.io/docs/developers/
@@ -85,24 +80,4 @@ numbers and point to the getters.
 
 ## Environment
 
-### Original reported environment
-
 SDK version 0.32.1, network Somnia Tokyo testnet (Hideki, chain 50383), wallet address: none (read- only) Note: the registries this page documents are on Somnia mainnet (5031) and Shannon testnet (50312), so the reads above were made there (view calls only).
-
-### Packaging and new checks
-
-Prepared 1 November 2026. New executions use local source snapshots and synthetic inputs only; wallet: none, signing: none, transaction submission: none. Offline Node checks used v24.22.1. SDK `0.32.1` is the source report target, not an installed or freshly tested dependency in this pass.
-
-## Severity rationale
-
-Proposed normal in the source PDF for the described correctness, documentation or integration problem. An organizer must confirm intended behavior, impact, scope and duplication.
-
-## Scope, duplicates and limitations
-
-This item concerns adjacent spot, CCXT or bot-tool documentation/behavior. Eligibility under a perps-focused competition needs organizer confirmation. The source PDF sometimes uses a Hideki boilerplate environment for a Shannon-only operation; the actual network described in the procedure takes precedence.
-
-No new competitor-repository sweep was performed. The PDF claims a previous 109-repository comparison; its inventory was not attached, so first-report status is unknown. Historical exclusions of other reporters' findings are preserved in the excerpt and do not prove uniqueness. Live rules, whitelist, current deadline, payout and acceptance remain unverified; see [rules status](../RULES.md).
-
-## Suggested remediation
-
-Link to registry getters or publish deployment-specific values with a date and an explicit warning that they are tunable.

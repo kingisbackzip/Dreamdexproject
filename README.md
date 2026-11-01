@@ -1,48 +1,10 @@
-# dreamDEX Perps — Feedback Reports
+# dreamDEX Perps Feedback
 
-A review-ready collection of **36 feedback reports** covering the dreamDEX SDK, bot kit, application and documentation. Each report includes reproduction steps, expected and actual behavior, impact, suggested remediation and page-level evidence provenance.
+36 feedback reports for the [dreamDEX Perps Builder Bounty](https://dorahacks.io/hackathon/dreamdex-perps-bounty/detail), covering the SDK, bot kit, documentation and application.
 
-**Validation:** eight reports have passing offline reproductions against pinned upstream code. The other 28 retain evidence from the supplied report and have not been independently reproduced here. Severity labels are proposals for reviewer assessment.
+Each issue has its own Markdown file in [`feedback/`](feedback/) using the required format: severity, area, steps to reproduce, expected behavior, actual behavior, evidence and environment.
 
-## Start here
-
-- Browse the [report index](#report-index) below.
-- Read [validation results and limits](VALIDATION.md) and [evidence provenance](evidence/README.md).
-- Use [SUBMISSION.md](SUBMISSION.md) for the Feedback-track submission description and [RULES.md](RULES.md) for the recorded scope requirements.
-
-The public collection contains 23 SDK, 11 documentation and 2 application reports: 2 proposed major and 34 normal. Original report IDs are preserved; two security-sensitive reports are reserved for private disclosure and are excluded from this repository.
-
-## Reproduce the checks
-
-Requirements: **Node.js 24+** and **Python 3**. These checks need no dependency installation, RPC access, wallet or transactions.
-
-```sh
-git clone https://github.com/kingisbackzip/Dreamdexproject.git
-cd Dreamdexproject
-python3 scripts/validate-package.py
-node --test scripts/reproduce-offline.mjs
-```
-
-The validator checks report structure, evidence links, counts and 12 upstream source blob hashes. The test harness covers reports **004, 019, 022, 023, 025, 027, 028 and 029**, with synthetic inputs and mocked service boundaries. Passing checks establish the documented code behavior, not live exploitability or bounty acceptance.
-
-An additional SDK unit reproduction script is provided for reports 037 and 038; it has not been run in this validation pass. Its optional dependencies are pinned in `package.json`.
-
-## Repository contents
-
-| Path | Contents |
-| --- | --- |
-| `feedback/` | One self-contained Markdown report per issue |
-| `evidence/pdf/` | Source-report excerpts with original page mapping |
-| `evidence/upstream/` | Commit-pinned source snapshots and licenses |
-| `evidence/validation/` | Captured verification output |
-| `scripts/` | Package validator and reproduction harnesses |
-| `manifest.json` | Machine-readable report inventory |
-
-## Submission status
-
-Prepared for review in the [dreamDEX Perps bounty](https://dorahacks.io/hackathon/dreamdex-perps-bounty/detail). Publishing this repository does not submit a DoraHacks Build or send a disclosure email. Current eligibility, scope, duplicates and acceptance require organizer review. The source report targets SDK 0.32.1 and Somnia Tokyo / Hideki (chain 50383); see individual reports for version-specific and adjacent-network limitations.
-
-## Report index
+## Reports
 
 | ID | Feedback report | Severity | Area | Validation |
 | --- | --- | --- | --- | --- |
@@ -82,3 +44,20 @@ Prepared for review in the [dreamDEX Perps bounty](https://dorahacks.io/hackatho
 | 036 | [MIGRATING.md links to an absent packaged changelog and stale release status](feedback/036-pkg-05-migrating-links-missing-changelog.md) | normal | docs | supplied-evidence-only |
 | 037 | [fromHuman number rounding differs from the documented decimal rounding rule](feedback/037-sdk2-01-fromhuman-number-not-half-away-from-zero.md) | normal | SDK | supplied-evidence-only |
 | 038 | [Balance and amount helpers silently ignore invalid quantum values](feedback/038-sdk2-02-floor-ceil-quantum-invalid-silently-ignored.md) | normal | SDK | supplied-evidence-only |
+
+## Reproduce
+
+With Node.js 24+ and Python 3, from the repository root:
+
+```sh
+python3 scripts/validate-package.py
+node --test scripts/reproduce-offline.mjs
+```
+
+No dependency installation or wallet is needed for these checks. Eight reports have passing offline reproductions: 004, 019, 022, 023, 025, 027, 028 and 029. Other results are attributed to the supplied source report. See [test boundaries](VALIDATION.md) and [evidence provenance](evidence/README.md).
+
+The optional `scripts/reproduce-sdk-units.mjs` checks reports 037 and 038 using the dependencies in `package.json`; it has not been run in this validation pass.
+
+## Security disclosures
+
+Security vulnerabilities are excluded from this public repository and must be sent privately to **security@dreamdex.io**, as required by the bounty rules.

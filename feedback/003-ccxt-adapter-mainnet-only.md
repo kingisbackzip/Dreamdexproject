@@ -2,33 +2,13 @@
 
 Severity: normal
 Area: SDK
-Validation status: user-supplied evidence only; not rerun in this packaging pass
-Disclosure: ordinary feedback candidate
-Source item: 3; PDF pages 11-12
-
-## Summary and impact
-
-CCXT adapter lacks documented network limitations and testnet configuration. The detailed behavior and impact below were reported in the supplied PDF; production impact and payout are not established by this package.
 
 ## Steps to reproduce
 
-### Procedure recorded in the source PDF
-
-Historical `scripts/`, `scratch/`, `candidates/` and raw-log paths in this procedure were not supplied. They identify the original research workspace, not executable files in this repository. Use the included replacement check where provided; otherwise recreate the stated read-only call or inspect the pinned source before relying on the claim.
-
-```text
-1. Read https://app.testnet.dreamdex.io/docs/developers (Overview): “The CCXT binding wraps the
-      REST endpoints (and WebSocket where supported) behind a standard interface, so existing CCXT
-      bots work with minimal changes.”
-   2. Read https://app.testnet.dreamdex.io/docs/developers/http-api (“Base URLs”): the REST API has a
-      “Testnet (Somnia Shannon) 50312 https://stg.api.dreamdex.io/v0” environment, and “To target
-      testnet, substitute the staging base URL above”.
-   3. Read https://app.testnet.dreamdex.io/docs/developers/libraries/ccxt: no mention of environment,
-      testnet, sandbox or chain.
-   4. Open the adapter at the branch head: https://github.com/somnia-chain/ccxt/blob/
-      d281cb4ddba757cb5934694ddf9ffdaa3efb2b95/ts/src/dreamdex.ts and check has.sandbox , urls
-      and options.chainId .
-```
+1. Read https://app.testnet.dreamdex.io/docs/developers (Overview): “The CCXT binding wraps the REST endpoints (and WebSocket where supported) behind a standard interface, so existing CCXT bots work with minimal changes.”
+2. Read https://app.testnet.dreamdex.io/docs/developers/http-api (“Base URLs”): the REST API has a “Testnet (Somnia Shannon) 50312 https://stg.api.dreamdex.io/v0” environment, and “To target testnet, substitute the staging base URL above”.
+3. Read https://app.testnet.dreamdex.io/docs/developers/libraries/ccxt: no mention of environment, testnet, sandbox or chain.
+4. Open the adapter at the branch head: https://github.com/somnia-chain/ccxt/blob/ d281cb4ddba757cb5934694ddf9ffdaa3efb2b95/ts/src/dreamdex.ts and check has.sandbox , urls and options.chainId .
 
 ## Expected
 
@@ -44,12 +24,16 @@ Since the docs present CCXT as a wrapper over that REST API, the adapter support
 
 Note: the CCXT page does not itself claim testnet support; the gap is that the docs present it as a wrapper over a REST API documented for testnet, while the adapter can only reach mainnet and nothing says so.
 
+This item concerns adjacent spot, CCXT or bot-tool documentation/behavior. Eligibility under a perps-focused competition needs organizer confirmation. The source PDF sometimes uses a Hideki boilerplate environment for a Shannon-only operation; the actual network described in the procedure takes precedence.
+
 ## Evidence
 
-- [Original item excerpt](../evidence/pdf/003.txt) from PDF pages 11-12. This is extracted report text, not an original raw execution log.
+Results below are from the source report; not independently rerun.
+
+- [Original item excerpt](../evidence/pdf/003.txt) from PDF pages 11-12. 
 - [Source provenance and limitations](../evidence/README.md).
 
-### Evidence as supplied in the PDF
+### Recorded results
 
 ```text
 Re-verified 2026-10-29 14:54 UTC: git ls-remote https://github.com/somnia-chain/ccxt refs/heads/add-
@@ -67,24 +51,4 @@ reverify-2026-10-22/dreamdex.ts (read from source; the alpha package was not ins
 
 ## Environment
 
-### Original reported environment
-
 CCXT fork branch somnia-chain/ccxt#add-dreamdex-exchange @ d281cb4 (unpublished alpha). Testnet per HTTP API docs: Somnia Shannon 50312; Somnia Tokyo testnet (Hideki 50383) not reachable through the adapter. Wallet: none (read-only)
-
-### Packaging and new checks
-
-Prepared 1 November 2026. New executions use local source snapshots and synthetic inputs only; wallet: none, signing: none, transaction submission: none. Offline Node checks used v24.22.1. SDK `0.32.1` is the source report target, not an installed or freshly tested dependency in this pass.
-
-## Severity rationale
-
-Proposed normal in the source PDF for the described correctness, documentation or integration problem. An organizer must confirm intended behavior, impact, scope and duplication.
-
-## Scope, duplicates and limitations
-
-This item concerns adjacent spot, CCXT or bot-tool documentation/behavior. Eligibility under a perps-focused competition needs organizer confirmation. The source PDF sometimes uses a Hideki boilerplate environment for a Shannon-only operation; the actual network described in the procedure takes precedence.
-
-No new competitor-repository sweep was performed. The PDF claims a previous 109-repository comparison; its inventory was not attached, so first-report status is unknown. Historical exclusions of other reporters' findings are preserved in the excerpt and do not prove uniqueness. Live rules, whitelist, current deadline, payout and acceptance remain unverified; see [rules status](../RULES.md).
-
-## Suggested remediation
-
-Document that this adapter is spot/mainnet-only, or introduce explicit sandbox endpoints and chain selection.

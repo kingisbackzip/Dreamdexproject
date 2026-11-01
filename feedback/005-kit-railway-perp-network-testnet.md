@@ -2,30 +2,12 @@
 
 Severity: normal
 Area: SDK
-Validation status: user-supplied evidence only; not rerun in this packaging pass
-Disclosure: ordinary feedback candidate
-Source item: 5; PDF pages 15-16
-
-## Summary and impact
-
-Railway environment template defeats automatic Hideki selection for perps. The detailed behavior and impact below were reported in the supplied PDF; production impact and payout are not established by this package.
 
 ## Steps to reproduce
 
-### Procedure recorded in the source PDF
-
-Historical `scripts/`, `scratch/`, `candidates/` and raw-log paths in this procedure were not supplied. They identify the original research workspace, not executable files in this repository. Use the included replacement check where provided; otherwise recreate the stated read-only call or inspect the pinned source before relying on the claim.
-
-```text
-1. Read .env.railway:1-7 : “Import: Railway service → Variables → RAW Editor → paste this file”, then
-      STRATEGY=starter , NETWORK=testnet , DRY_RUN=true . docs/railway.md:95 promises “a perp service
-      with no NETWORK runs on Hideki” (also docs/perps.md:78-79).
-   2. Simulate the Railway service after that import with a perp strategy (non-key placeholder,
-      DRY_RUN, nothing can be sent): PRIVATE_KEY=0x00 STRATEGY=perp-guard NETWORK=testnet
-      DRY_RUN=true node scripts/railway-start.mjs , then the same with NETWORK unset.
-   3. See what NETWORK=testnet means for perps: NETWORK=testnet npx tsx scripts/perp-doctor.ts (no
-      key).
-```
+1. Read .env.railway:1-7 : “Import: Railway service → Variables → RAW Editor → paste this file”, then STRATEGY=starter , NETWORK=testnet , DRY_RUN=true . docs/railway.md:95 promises “a perp service with no NETWORK runs on Hideki” (also docs/perps.md:78-79).
+2. Simulate the Railway service after that import with a perp strategy (non-key placeholder, DRY_RUN, nothing can be sent): PRIVATE_KEY=0x00 STRATEGY=perp-guard NETWORK=testnet DRY_RUN=true node scripts/railway-start.mjs , then the same with NETWORK unset.
+3. See what NETWORK=testnet means for perps: NETWORK=testnet npx tsx scripts/perp-doctor.ts (no key).
 
 ## Expected
 
@@ -41,10 +23,12 @@ Scope: the Railway deploy path ( .env.railway , the Dockerfile copy, railway-sta
 
 ## Evidence
 
-- [Original item excerpt](../evidence/pdf/005.txt) from PDF pages 15-16. This is extracted report text, not an original raw execution log.
+Results below are from the source report; not independently rerun.
+
+- [Original item excerpt](../evidence/pdf/005.txt) from PDF pages 15-16. 
 - [Source provenance and limitations](../evidence/README.md).
 
-### Evidence as supplied in the PDF
+### Recorded results
 
 ```text
 • https://github.com/somnia-chain/dreamdex-bot-kit/blob/
@@ -67,22 +51,4 @@ Scope: the Railway deploy path ( .env.railway , the Dockerfile copy, railway-sta
 
 ## Environment
 
-### Original reported environment
-
 dreamdex-bot-kit @ 25798660bbe4674a6f83a960b202852896e2fed4, Somnia Tokyo testnet (Hideki, chain 50383), wallet: none (read-only, DRY_RUN)
-
-### Packaging and new checks
-
-Prepared 1 November 2026. New executions use local source snapshots and synthetic inputs only; wallet: none, signing: none, transaction submission: none. Offline Node checks used v24.22.1. SDK `0.32.1` is the source report target, not an installed or freshly tested dependency in this pass.
-
-## Severity rationale
-
-Proposed normal in the source PDF for the described correctness, documentation or integration problem. An organizer must confirm intended behavior, impact, scope and duplication.
-
-## Scope, duplicates and limitations
-
-No new competitor-repository sweep was performed. The PDF claims a previous 109-repository comparison; its inventory was not attached, so first-report status is unknown. Historical exclusions of other reporters' findings are preserved in the excerpt and do not prove uniqueness. Live rules, whitelist, current deadline, payout and acceptance remain unverified; see [rules status](../RULES.md).
-
-## Suggested remediation
-
-Avoid setting a shared NETWORK value in the deployment template, or validate the network against the chosen strategy before starting it.

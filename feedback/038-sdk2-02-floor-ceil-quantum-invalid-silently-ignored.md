@@ -2,32 +2,16 @@
 
 Severity: normal
 Area: SDK
-Validation status: user-supplied evidence only; not rerun in this packaging pass
-Disclosure: ordinary feedback candidate
-Source item: 38; PDF pages 62-63
-
-## Summary and impact
-
-Balance and amount helpers silently ignore invalid quantum values. The detailed behavior and impact below were reported in the supplied PDF; production impact and payout are not established by this package.
 
 ## Steps to reproduce
 
-1. From `dreamdex-submission/`, run `npm install --ignore-scripts --no-audit --no-fund` to install the exact direct SDK/viem versions in package.json.
+1. From the repository root, run `npm install --ignore-scripts --no-audit --no-fund` to install the exact direct SDK/viem versions in package.json.
 2. Run `node scripts/reproduce-sdk-units.mjs`. The script performs only pure SDK conversions; it creates no client and makes no RPC calls.
-3. Compare the numbered output to the historical evidence below. This reconstructed script has not been executed here because the SDK dependencies were not available locally.
+3. Compare the numbered output to the historical evidence below. This additional script has not been executed in this validation pass.
 
-### Procedure recorded in the source PDF
-
-Historical `scripts/`, `scratch/`, `candidates/` and raw-log paths in this procedure were not supplied. They identify the original research workspace, not executable files in this repository. Use the included replacement check where provided; otherwise recreate the stated read-only call or inspect the pinned source before relying on the claim.
-
-```text
 1. Install @somnia-chain/markets-sdk@0.32.1 (no network needed).
-   2. Take the Hideki 1000PEPE perp. Its indexer Market row has quoteDecimals: 18 and tickSize:
-      "100000000000" , which is 0.0000001 USDso. In JS, String(0.0000001) is "1e-7" .
-   3. Run node scripts/sdk2-quantum-silent.mjs . It calls floorRawBalance(raw, 18, q) and
-       ceilRawAmount(raw, 18, q) for q in "0.0000001" , "1e-7" , "0" , "-0.0000001" , "abc" , and calls
-       snapRawToGrid with step 0n and a negative step for comparison.
-```
+2. Take the Hideki 1000PEPE perp. Its indexer Market row has quoteDecimals: 18 and tickSize: "100000000000" , which is 0.0000001 USDso. In JS, String(0.0000001) is "1e-7" .
+3. Run node scripts/sdk2-quantum-silent.mjs . It calls floorRawBalance(raw, 18, q) and ceilRawAmount(raw, 18, q) for q in "0.0000001" , "1e-7" , "0" , "-0.0000001" , "abc" , and calls snapRawToGrid with step 0n and a negative step for comparison.
 
 ## Expected
 
@@ -39,10 +23,12 @@ Only the plain-decimal "0.0000001" is applied. For "1e-7" , "0" , "-0.0000001" a
 
 ## Evidence
 
-- [Original item excerpt](../evidence/pdf/038.txt) from PDF pages 62-63. This is extracted report text, not an original raw execution log.
+Results below are from the source report; not independently rerun.
+
+- [Original item excerpt](../evidence/pdf/038.txt) from PDF pages 62-63. 
 - [Source provenance and limitations](../evidence/README.md).
 
-### Evidence as supplied in the PDF
+### Recorded results
 
 ```text
 node scripts/sdk2-quantum-silent.mjs , run twice with identical output (md5 0a99a990…), 2026-10-31
@@ -68,22 +54,4 @@ or accept exponent notation, which viem parseUnits rejects.
 
 ## Environment
 
-### Original reported environment
-
 SDK version 0.32.1, network Somnia Tokyo testnet (Hideki, chain 50383), wallet address: none (read- only)
-
-### Packaging and new checks
-
-Prepared 1 November 2026. New executions use local source snapshots and synthetic inputs only; wallet: none, signing: none, transaction submission: none. Offline Node checks used v24.22.1. SDK `0.32.1` is the source report target, not an installed or freshly tested dependency in this pass.
-
-## Severity rationale
-
-Proposed normal in the source PDF for the described correctness, documentation or integration problem. An organizer must confirm intended behavior, impact, scope and duplication.
-
-## Scope, duplicates and limitations
-
-No new competitor-repository sweep was performed. The PDF claims a previous 109-repository comparison; its inventory was not attached, so first-report status is unknown. Historical exclusions of other reporters' findings are preserved in the excerpt and do not prove uniqueness. Live rules, whitelist, current deadline, payout and acceptance remain unverified; see [rules status](../RULES.md).
-
-## Suggested remediation
-
-Reject unparseable or non-positive quantum input explicitly, or intentionally support exponent notation with equivalent grid behavior.

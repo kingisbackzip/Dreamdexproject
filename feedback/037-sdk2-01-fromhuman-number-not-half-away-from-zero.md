@@ -2,32 +2,16 @@
 
 Severity: normal
 Area: SDK
-Validation status: user-supplied evidence only; not rerun in this packaging pass
-Disclosure: ordinary feedback candidate
-Source item: 37; PDF pages 60-61
-
-## Summary and impact
-
-fromHuman number rounding differs from the documented decimal rounding rule. The detailed behavior and impact below were reported in the supplied PDF; production impact and payout are not established by this package.
 
 ## Steps to reproduce
 
-1. From `dreamdex-submission/`, run `npm install --ignore-scripts --no-audit --no-fund` to install the exact direct SDK/viem versions in package.json.
+1. From the repository root, run `npm install --ignore-scripts --no-audit --no-fund` to install the exact direct SDK/viem versions in package.json.
 2. Run `node scripts/reproduce-sdk-units.mjs`. The script performs only pure SDK conversions; it creates no client and makes no RPC calls.
-3. Compare the numbered output to the historical evidence below. This reconstructed script has not been executed here because the SDK dependencies were not available locally.
+3. Compare the numbered output to the historical evidence below. This additional script has not been executed in this validation pass.
 
-### Procedure recorded in the source PDF
-
-Historical `scripts/`, `scratch/`, `candidates/` and raw-log paths in this procedure were not supplied. They identify the original research workspace, not executable files in this repository. Use the included replacement check where provided; otherwise recreate the stated read-only call or inspect the pinned source before relying on the claim.
-
-```text
 1. Install @somnia-chain/markets-sdk@0.32.1 (no network, no keys needed).
-   2. Read the fromHuman JSDoc in dist/units.d.ts : “A number carrying more fraction digits than
-       decimals is ROUNDED to scale (half-away-from-zero, via toFixed ): fromHuman(0.1234567, 6) is
-       123457n .”
-   3. Run node scripts/sdk2-fromhuman-half.mjs , which calls fromHuman with exact decimal halves as a
-      number and as a string.
-```
+2. Read the fromHuman JSDoc in dist/units.d.ts : “A number carrying more fraction digits than decimals is ROUNDED to scale (half-away-from-zero, via toFixed ): fromHuman(0.1234567, 6) is 123457n .”
+3. Run node scripts/sdk2-fromhuman-half.mjs , which calls fromHuman with exact decimal halves as a number and as a string.
 
 ## Expected
 
@@ -37,12 +21,16 @@ Half-away-from-zero, as documented: fromHuman(1.005, 2) = 101n , fromHuman(2.675
 
 For these inputs the number path rounds toward zero, because Number.prototype.toFixed rounds the double’s binary expansion (1.005 is stored as 1.00499999…). The string path, given the same literal, rounds half-away-from-zero. So one value typed by a user produces two different raw amounts depending on its JS type. 0.0000005 at 6 decimals (half of one raw unit) becomes 0n , so a non-zero human amount silently converts to zero.
 
+JavaScript numeric literals are binary floats, not exact decimal halves. The disagreement with the claimed decimal rounding rule is the issue; do not describe the binary value itself as an exact decimal.
+
 ## Evidence
 
-- [Original item excerpt](../evidence/pdf/037.txt) from PDF pages 60-61. This is extracted report text, not an original raw execution log.
+Results below are from the source report; not independently rerun.
+
+- [Original item excerpt](../evidence/pdf/037.txt) from PDF pages 60-61. 
 - [Source provenance and limitations](../evidence/README.md).
 
-### Evidence as supplied in the PDF
+### Recorded results
 
 ```text
 node scripts/sdk2-fromhuman-half.mjs , run twice with identical output (md5 14ab64ea…), 2026-10-31
@@ -71,24 +59,4 @@ This one is about the number path contradicting its stated rounding mode and the
 
 ## Environment
 
-### Original reported environment
-
 SDK version 0.32.1, network Somnia Tokyo testnet (Hideki, chain 50383), wallet address: none (read- only)
-
-### Packaging and new checks
-
-Prepared 1 November 2026. New executions use local source snapshots and synthetic inputs only; wallet: none, signing: none, transaction submission: none. Offline Node checks used v24.22.1. SDK `0.32.1` is the source report target, not an installed or freshly tested dependency in this pass.
-
-## Severity rationale
-
-Proposed normal in the source PDF for the described correctness, documentation or integration problem. An organizer must confirm intended behavior, impact, scope and duplication.
-
-## Scope, duplicates and limitations
-
-JavaScript numeric literals are binary floats, not exact decimal halves. The disagreement with the claimed decimal rounding rule is the issue; do not describe the binary value itself as an exact decimal.
-
-No new competitor-repository sweep was performed. The PDF claims a previous 109-repository comparison; its inventory was not attached, so first-report status is unknown. Historical exclusions of other reporters' findings are preserved in the excerpt and do not prove uniqueness. Live rules, whitelist, current deadline, payout and acceptance remain unverified; see [rules status](../RULES.md).
-
-## Suggested remediation
-
-Round the decimal representation consistently where intended, or describe binary toFixed rounding precisely and recommend decimal-string input.

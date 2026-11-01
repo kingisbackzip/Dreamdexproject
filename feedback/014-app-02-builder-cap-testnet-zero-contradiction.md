@@ -2,19 +2,10 @@
 
 Severity: normal
 Area: docs
-Validation status: user-supplied evidence only; not rerun in this packaging pass
-Disclosure: ordinary feedback candidate
-Source item: 14; PDF pages 27-28
-
-## Summary and impact
-
-Functions reference incorrectly describes testnet builder codes as disabled. The detailed behavior and impact below were reported in the supplied PDF; production impact and payout are not established by this package.
 
 ## Steps to reproduce
 
-### Procedure recorded in the source PDF
-
-Historical `scripts/`, `scratch/`, `candidates/` and raw-log paths in this procedure were not supplied. They identify the original research workspace, not executable files in this repository. Use the included replacement check where provided; otherwise recreate the stated read-only call or inspect the pinned source before relying on the claim.
+### Original reproduction procedure
 
 For a new check, restrict view calls to Shannon testnet 50312. Mainnet observations in the excerpt are historical supplied evidence and were not repeated here.
 
@@ -50,12 +41,16 @@ All pages state the same cap, and it matches the chain: 100000 (1%) on both netw
 - On chain, every testnet pool checked returns 100000, so the Functions page is wrong. A builder who reads the function reference would think builder codes are disabled on testnet and skip testing them, or would expect BuilderCodesNotSupported to fire.
 - The same wrong sentence is on the mainnet docs copy (https://app.dreamdex.io/docs/developers/ contracts/functions).
 
+This item concerns adjacent spot, CCXT or bot-tool documentation/behavior. Eligibility under a perps-focused competition needs organizer confirmation. The source PDF sometimes uses a Hideki boilerplate environment for a Shannon-only operation; the actual network described in the procedure takes precedence.
+
 ## Evidence
 
-- [Original item excerpt](../evidence/pdf/014.txt) from PDF pages 27-28. This is extracted report text, not an original raw execution log.
+Results below are from the source report; not independently rerun.
+
+- [Original item excerpt](../evidence/pdf/014.txt) from PDF pages 27-28. 
 - [Source provenance and limitations](../evidence/README.md).
 
-### Evidence as supplied in the PDF
+### Recorded results
 
 ```text
 • eth_call getMaxBuilderFeeBpsTimes1k() (selector 0x78135d52), 2026-10-31 ~02:24 UTC:
@@ -70,24 +65,4 @@ All pages state the same cap, and it matches the chain: 100000 (1%) on both netw
 
 ## Environment
 
-### Original reported environment
-
 curl + JSON-RPC eth_call. The docs are served from the Somnia Tokyo testnet app host (Hideki, chain 50383). The pools checked are on Somnia Shannon testnet 50312 and mainnet 5031, the networks the page talks about. Wallet address: none (read-only).
-
-### Packaging and new checks
-
-Prepared 1 November 2026. New executions use local source snapshots and synthetic inputs only; wallet: none, signing: none, transaction submission: none. Offline Node checks used v24.22.1. SDK `0.32.1` is the source report target, not an installed or freshly tested dependency in this pass.
-
-## Severity rationale
-
-Proposed normal in the source PDF for the described correctness, documentation or integration problem. An organizer must confirm intended behavior, impact, scope and duplication.
-
-## Scope, duplicates and limitations
-
-This item concerns adjacent spot, CCXT or bot-tool documentation/behavior. Eligibility under a perps-focused competition needs organizer confirmation. The source PDF sometimes uses a Hideki boilerplate environment for a Shannon-only operation; the actual network described in the procedure takes precedence.
-
-No new competitor-repository sweep was performed. The PDF claims a previous 109-repository comparison; its inventory was not attached, so first-report status is unknown. Historical exclusions of other reporters' findings are preserved in the excerpt and do not prove uniqueness. Live rules, whitelist, current deadline, payout and acceptance remain unverified; see [rules status](../RULES.md).
-
-## Suggested remediation
-
-Make the function reference consistent with the configured network and its getters; avoid hard-coding tunable deployment values.

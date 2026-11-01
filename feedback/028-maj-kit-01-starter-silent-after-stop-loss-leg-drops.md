@@ -2,48 +2,24 @@
 
 Severity: normal
 Area: SDK
-Validation status: independently reproduced offline (limited source/mocked strategy checks)
-Disclosure: ordinary feedback candidate
-Source item: 28; PDF pages 48-49
-
-## Summary and impact
-
-perp-starter does not react when the protective stop leg disappears. The detailed behavior and impact below were reported in the supplied PDF; production impact and payout are not established by this package.
 
 ## Steps to reproduce
 
 1. Use Node.js 24 (validated here with v24.22.1). No npm install is needed.
-2. From `dreamdex-submission/`, run:
+2. From the repository root, run:
 
    ```sh
    node --test --test-name-pattern='028:' scripts/reproduce-offline.mjs
    ```
 
 3. The named test checks the current defect and its documented controls against pinned upstream text. A passing test confirms the described offline behavior, not a correction.
-4. See [the full test output](../evidence/validation/offline-tests.tap) and [harness boundaries](../VALIDATION.md).
+4. See `[the full test output](../evidence/validation/offline-tests.tap)` and `[harness boundaries](../VALIDATION.md)`.
 
 The strategy body is the real pinned upstream strategy. All perp-core helpers are mocked at its import boundary; this is not the original PDF harness and does not run the real perp-core or a contract. `DRY_RUN=false` exists only in an isolated synthetic process object with recording mocks.
 
-### Procedure recorded in the source PDF
-
-Historical `scripts/`, `scratch/`, `candidates/` and raw-log paths in this procedure were not supplied. They identify the original research workspace, not executable files in this repository. Use the included replacement check where provided; otherwise recreate the stated read-only call or inspect the pinned source before relying on the claim.
-
-```text
-1. export BOT_KIT=/path/to/dreamdex-bot-kit (commit 4e75896, after npm ci ), then cd scripts/maj-
-      kit
-   2. ./run.sh perp-starter 100 HARNESS_SCENARIO=stopdrop PERP_NOTIONAL_USDSO=200 PERP_TICK_MS=500
-      HARNESS_STOP_MS=4200 PERP_SYMBOL=BTC-PERP DRY_RUN=false The harness runs the REAL strategies/
-      perp-starter/src/index.ts and the REAL perp-core. A Node resolve hook ( register.mjs +
-      hooks.mjs ) points the strategy’s @dreamdex-bot-kit/perp-core import at perp-core-shim.ts . The
-      shim re-exports every real perp-core function and swaps only createExchange for fake-
-      exchange.ts , a mock exchange with no network and no key. All writes are recorded as
-      [MOCK WRITE] .
-   3. Scenario: the bot opens a long and arms its bracket (TP 102000 / SL 99000). After two ticks the
-      stop-loss leg (#12) fires at 99000 but places nothing ( dropReason NoFill / PlacementFailed). The
-      registry deletes a fired leg and leaves its partner live and unlinked. Indexer schema docs,
-      siblingOrderId : “A leg that fires WITHOUT filling leaves its partner live and UNLINKED”. The mark
-      then keeps falling to 90000.
-```
+1. export BOT_KIT=/path/to/dreamdex-bot-kit (commit 4e75896, after npm ci ), then cd scripts/maj- kit
+2. ./run.sh perp-starter 100 HARNESS_SCENARIO=stopdrop PERP_NOTIONAL_USDSO=200 PERP_TICK_MS=500 HARNESS_STOP_MS=4200 PERP_SYMBOL=BTC-PERP DRY_RUN=false The harness runs the REAL strategies/ perp-starter/src/index.ts and the REAL perp-core. A Node resolve hook ( register.mjs + hooks.mjs ) points the strategy’s @dreamdex-bot-kit/perp-core import at perp-core-shim.ts . The shim re-exports every real perp-core function and swaps only createExchange for fake- exchange.ts , a mock exchange with no network and no key. All writes are recorded as [MOCK WRITE] .
+3. Scenario: the bot opens a long and arms its bracket (TP 102000 / SL 99000). After two ticks the stop-loss leg (#12) fires at 99000 but places nothing ( dropReason NoFill / PlacementFailed). The registry deletes a fired leg and leaves its partner live and unlinked. Indexer schema docs, siblingOrderId : “A leg that fires WITHOUT filling leaves its partner live and UNLINKED”. The mark then keeps falling to 90000.
 
 ## Expected
 
@@ -61,15 +37,15 @@ Code: strategies/perp-starter/src/index.ts at 4e75896, in the watch loop ( const
 
 Why the leg drops on the live testnet: self-match CancelTaker against the trader’s own resting order (Samuel1505 #10, 59 drops / 22 traders), or a slippage-bounded STOP_MARKET that finds no liquidity (NoFill).
 
-A new offline check reproduced the narrow behavior described above. Live fills, chain conditions, balances, bracket execution and financial loss were not tested.
-
 ## Evidence
 
-- [Original item excerpt](../evidence/pdf/028.txt) from PDF pages 48-49. This is extracted report text, not an original raw execution log.
+Offline reproduction passed; see the linked test output.
+
+- [Original item excerpt](../evidence/pdf/028.txt) from PDF pages 48-49. 
 - [Source provenance and limitations](../evidence/README.md).
 - [New offline execution log](../evidence/validation/offline-tests.tap), test `028:`.
 
-### Evidence as supplied in the PDF
+### Recorded results
 
 ```text
 • Log: evidence/candidates/maj-kit-starter-stopdrop.log
@@ -84,22 +60,6 @@ makes it normal, or major if the judges count “the default protection path sil
 
 ## Environment
 
-### Original reported environment
-
 dreamdex-bot-kit commit 4e75896, network Somnia Tokyo testnet (Hideki, chain 50383), wallet address: none (read-only, mock exchange, no transactions)
 
-### Packaging and new checks
-
-Prepared 1 November 2026. New executions use local source snapshots and synthetic inputs only; wallet: none, signing: none, transaction submission: none. Offline Node checks used v24.22.1. SDK `0.32.1` is the source report target, not an installed or freshly tested dependency in this pass.
-
-## Severity rationale
-
-Proposed normal in the source PDF for the described correctness, documentation or integration problem. An organizer must confirm intended behavior, impact, scope and duplication.
-
-## Scope, duplicates and limitations
-
-No new competitor-repository sweep was performed. The PDF claims a previous 109-repository comparison; its inventory was not attached, so first-report status is unknown. Historical exclusions of other reporters' findings are preserved in the excerpt and do not prove uniqueness. Live rules, whitelist, current deadline, payout and acceptance remain unverified; see [rules status](../RULES.md).
-
-## Suggested remediation
-
-Track the protective leg, detect a removed or failed stop, and warn, re-arm, or close according to an explicit policy.
+Offline reproduction: Node.js v24.22.1; synthetic inputs; no wallet or transactions.

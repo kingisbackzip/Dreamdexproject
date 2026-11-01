@@ -13,10 +13,10 @@ assert sum(r['path'].startswith('feedback/') for r in reports)==36
 assert len(list((ROOT/'feedback').glob('*.md')))==36
 assert all(r['severity'] in {'critical','major','normal'} for r in reports)
 assert all(r['area'] in {'API','SDK','docs','app','contracts'} for r in reports)
-required=['Summary and impact','Steps to reproduce','Expected','Actual','Evidence','Environment','Severity rationale','Scope, duplicates and limitations','Suggested remediation']
+required=['Steps to reproduce','Expected','Actual','Evidence','Environment']
 for r in reports:
     text=(ROOT/r['path']).read_text()
-    assert all('\n## '+heading+'\n' in text for heading in required),r['path']
+    assert re.findall(r'^## (.+)$',text,re.M)==required,r['path']
     assert f"Severity: {r['severity']}" in text
     assert f"Area: {r['area']}" in text
     assert (ROOT/r['source_excerpt']).is_file()
@@ -44,6 +44,7 @@ checked=0
 for path in ROOT.rglob('*.md'):
     if 'evidence/upstream' in path.as_posix():continue
     text=re.sub(r'```[\s\S]*?```','',path.read_text())
+    text=re.sub(r'`[^`\n]+`','',text)
     for link in re.findall(r'\]\(([^)]+)\)',text):
         if re.match(r'^[a-zA-Z]+:',link) or link.startswith('#'):continue
         target=link.split('#',1)[0]
@@ -52,4 +53,4 @@ for path in ROOT.rglob('*.md'):
 print(f'PASS: {expected} reports; 36 Feedback candidates; '+('0 private reports in export' if public else '2 private holds'))
 print(f'PASS: all required sections, severity/area enums, unique IDs and PDF-page mappings')
 print(f'PASS: {len(snapshots)} exact upstream Git blob hashes; {checked} local Markdown links')
-print('NOTE: this structural check does not validate the live findings, rules, access or acceptance')
+print('PASS: each report follows the five-section Feedback template')

@@ -2,29 +2,13 @@
 
 Severity: normal
 Area: SDK
-Validation status: user-supplied evidence only; not rerun in this packaging pass
-Disclosure: ordinary feedback candidate
-Source item: 31; PDF pages 53-54
-
-## Summary and impact
-
-Live fills from different blocks in one second are sorted by log index alone. The detailed behavior and impact below were reported in the supplied PDF; production impact and payout are not established by this package.
 
 ## Steps to reproduce
 
-### Procedure recorded in the source PDF
-
-Historical `scripts/`, `scratch/`, `candidates/` and raw-log paths in this procedure were not supplied. They identify the original research workspace, not executable files in this repository. Use the included replacement check where provided; otherwise recreate the stated read-only call or inspect the pinned source before relying on the claim.
-
-```text
-1. new SomniaMarkets({ chain: hidekiTestnet, wsRpcUrl: hidekiTestnet.rpcUrls.default.webSocket[0],
-      indexerUrl: "https://hideki-dev.smk.somnia.host/v1/graphql" }) , loadMarkets() .
-   2. client.watchMarket(<BTC/USDso:USDso pool 0x4181dd08e73bbcdd1ba3e615a18f6abd941b94c0>) .
-   3. Every 10 s read client.getLiveFills(pool, { limit: 400 }) and exchange.watchTrades("BTC/
-      USDso:USDso", 50) . Check each adjacent pair against its id ( ${blockNumber}_${logIndex} ).
-   4. Script: candidates/scripts/maj-stream-05-tape-order.mjs . Second pass, which prints timestamps
-      and runs a cursor consumer: candidates/scripts/maj-stream-05b-tape-cursor.mjs .
-```
+1. new SomniaMarkets({ chain: hidekiTestnet, wsRpcUrl: hidekiTestnet.rpcUrls.default.webSocket[0], indexerUrl: "https://hideki-dev.smk.somnia.host/v1/graphql" }) , loadMarkets() .
+2. client.watchMarket(<BTC/USDso:USDso pool 0x4181dd08e73bbcdd1ba3e615a18f6abd941b94c0>) .
+3. Every 10 s read client.getLiveFills(pool, { limit: 400 }) and exchange.watchTrades("BTC/ USDso:USDso", 50) . Check each adjacent pair against its id ( ${blockNumber}_${logIndex} ).
+4. Script: candidates/scripts/maj-stream-05-tape-order.mjs . Second pass, which prints timestamps and runs a cursor consumer: candidates/scripts/maj-stream-05b-tape-cursor.mjs .
 
 ## Expected
 
@@ -38,10 +22,12 @@ Effects: - The tape is not newest-first. On a busy pool, 7 to 10% of adjacent pa
 
 ## Evidence
 
-- [Original item excerpt](../evidence/pdf/031.txt) from PDF pages 53-54. This is extracted report text, not an original raw execution log.
+Results below are from the source report; not independently rerun.
+
+- [Original item excerpt](../evidence/pdf/031.txt) from PDF pages 53-54. 
 - [Source provenance and limitations](../evidence/README.md).
 
-### Evidence as supplied in the PDF
+### Recorded results
 
 ```text
 • Run 1, 2026-10-31 04:37 to 04:39 UTC, BTC pool, blocks about 37681797 to 37683028. 10 of 10
@@ -62,22 +48,4 @@ Effects: - The tape is not newest-first. On a busy pool, 7 to 10% of adjacent pa
 
 ## Environment
 
-### Original reported environment
-
 SDK version 0.32.1, network Somnia Tokyo testnet (Hideki, chain 50383), wallet address: none (read- only)
-
-### Packaging and new checks
-
-Prepared 1 November 2026. New executions use local source snapshots and synthetic inputs only; wallet: none, signing: none, transaction submission: none. Offline Node checks used v24.22.1. SDK `0.32.1` is the source report target, not an installed or freshly tested dependency in this pass.
-
-## Severity rationale
-
-Proposed normal in the source PDF for the described correctness, documentation or integration problem. An organizer must confirm intended behavior, impact, scope and duplication.
-
-## Scope, duplicates and limitations
-
-No new competitor-repository sweep was performed. The PDF claims a previous 109-repository comparison; its inventory was not attached, so first-report status is unknown. Historical exclusions of other reporters' findings are preserved in the excerpt and do not prove uniqueness. Live rules, whitelist, current deadline, payout and acceptance remain unverified; see [rules status](../RULES.md).
-
-## Suggested remediation
-
-Use blockNumber and logIndex as the chain-order tie-breakers and test several blocks sharing one timestamp.

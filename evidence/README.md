@@ -1,5 +1,7 @@
 # Evidence provenance
 
-This ordinary-feedback export includes only the 36 source excerpts selected by manifest.json. These are text extracted from the owner-supplied 63-page PDF, not original raw execution logs. Historical research script/log paths in the excerpts were not attached. Original line wrapping and truncation are preserved. The original PDF is not included.
+`pdf/` contains excerpts from the supplied 63-page report, mapped to individual issues in `../manifest.json`. These excerpts preserve the original observations; they are not original raw execution logs. Historical script and raw-log paths mentioned in the excerpts refer to the original research workspace and are not included here. The original PDF is not included.
 
-Upstream source snapshots and their MIT licenses are under upstream/; their commit URLs and exact Git blob hashes are recorded in its manifest. validation/offline-tests.tap is a fresh eight-case offline run; validation/package-check.txt records the checks for this public repository. The reproduction boundaries are in VALIDATION.md.
+`upstream/` contains commit-pinned source snapshots, their Git blob hashes and upstream MIT licenses. `validation/` contains the fresh eight-case offline test output and package validation results. See [test boundaries](../VALIDATION.md).
+
+Source report SHA-256: `e6703be8e5036dd6386b14da201e7ce03fccf2b23f65c388dbb2d5086dac38a8`.

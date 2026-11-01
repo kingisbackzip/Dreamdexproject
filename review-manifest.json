@@ -1,0 +1,375 @@
+{
+  "review_date": "2026-11-01",
+  "source_commit": "1187c9174f73321b28917f8e7aa8854172ddc728",
+  "source_repository": "kingisbackzip/codex",
+  "upstream_head_observed": "4e75896896e024c03e2033d5920514f249998cd6",
+  "reviewed_count": 38,
+  "selected_count": 8,
+  "public_private_report_count": 0,
+  "reports": [
+    {
+      "id": "008",
+      "path": "feedback/008-sdk-preview-margin-ignores-max-position-size.md",
+      "title": "Margin-preview documentation overstates its position-cap guarantees",
+      "severity": "normal",
+      "area": "docs",
+      "pdf_pages": [
+        19,
+        20
+      ]
+    },
+    {
+      "id": "022",
+      "path": "feedback/022-kit-15-perp-side-typo-silently-long.md",
+      "title": "perp-starter silently maps unrecognized PERP_SIDE values to long",
+      "severity": "normal",
+      "area": "SDK",
+      "pdf_pages": [
+        41,
+        41
+      ]
+    },
+    {
+      "id": "023",
+      "path": "feedback/023-kit-16-perp-starter-tp-sl-unvalidated-inverted-bracket.md",
+      "title": "perp-starter accepts percentages that invert or negate bracket prices",
+      "severity": "normal",
+      "area": "SDK",
+      "pdf_pages": [
+        42,
+        42
+      ]
+    },
+    {
+      "id": "024",
+      "path": "feedback/024-kit-20-perp-maker-ask-rounds-down-below-mark.md",
+      "title": "perp-maker rounds sell quotes down and can move an ask below the mark",
+      "severity": "normal",
+      "area": "SDK",
+      "pdf_pages": [
+        43,
+        44
+      ]
+    },
+    {
+      "id": "028",
+      "path": "feedback/028-maj-kit-01-starter-silent-after-stop-loss-leg-drops.md",
+      "title": "perp-starter does not alert or recover when one protective stop leg disappears",
+      "severity": "normal",
+      "area": "SDK",
+      "pdf_pages": [
+        48,
+        49
+      ]
+    },
+    {
+      "id": "031",
+      "path": "feedback/031-maj-stream-01-live-tape-order-ignores-block.md",
+      "title": "Live fills in different blocks with the same timestamp are sorted by log index",
+      "severity": "normal",
+      "area": "SDK",
+      "pdf_pages": [
+        53,
+        54
+      ]
+    },
+    {
+      "id": "037",
+      "path": "feedback/037-sdk2-01-fromhuman-number-not-half-away-from-zero.md",
+      "title": "fromHuman rounding documentation overpromises decimal half-away behavior for numbers",
+      "severity": "normal",
+      "area": "docs",
+      "pdf_pages": [
+        60,
+        61
+      ]
+    },
+    {
+      "id": "038",
+      "path": "feedback/038-sdk2-02-floor-ceil-quantum-invalid-silently-ignored.md",
+      "title": "Quantum helpers silently fall back when a quantum is invalid or unsupported",
+      "severity": "normal",
+      "area": "SDK",
+      "pdf_pages": [
+        62,
+        63
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "001",
+      "title": "claimPerpVoucher cannot decode ClaimantNotFlat and ClaimantIsMainFunded",
+      "decision": "exclude-known",
+      "validation": "SDK/JSDoc checked",
+      "reason": "The two missing error names are explicitly acknowledged in the shipped JSDoc. Reconfirmed the omission; do not present it as a newly discovered defect."
+    },
+    {
+      "id": "002",
+      "title": "WebSocket getMarkets documentation uses an ignored filter and incorrect response values",
+      "decision": "defer-scope",
+      "validation": "historical evidence only",
+      "reason": "Spot WebSocket example and deployment values were not rerun; confirm the current example, responses and perps-bounty scope."
+    },
+    {
+      "id": "003",
+      "title": "CCXT adapter lacks documented network limitations and testnet configuration",
+      "decision": "defer-scope",
+      "validation": "historical source evidence",
+      "reason": "A mainnet-only spot adapter does not itself promise testnet/perps support. A documentation improvement needs scope/expectation confirmation; no mainnet testing performed."
+    },
+    {
+      "id": "004",
+      "title": "perp-core stops loading environment files before reaching the repository root",
+      "decision": "exclude-intended",
+      "validation": "fresh actual-function test",
+      "reason": "The source explicitly says nearest .env. The passing test confirms that behavior, not a violation of its stated contract; root/child merging is a feature request."
+    },
+    {
+      "id": "005",
+      "title": "Railway environment template defeats automatic Hideki selection for perps",
+      "decision": "exclude-current-guide",
+      "validation": "fresh entrypoint test and current guide",
+      "reason": "The current perps guide supplies NETWORK=hideki and accurately limits auto-selection to an unset NETWORK. Preserving an explicitly set testnet is expected; clearer template warnings may help."
+    },
+    {
+      "id": "006",
+      "title": "BINARY.md redeem example omits required marketId",
+      "decision": "defer-scope",
+      "validation": "historical evidence only",
+      "reason": "Binary/Event Contract documentation, rather than a demonstrated perps defect; needs scope confirmation and a fresh compile/runtime check."
+    },
+    {
+      "id": "007",
+      "title": "Place-then-cancel documentation passes an optional orderId without a guard",
+      "decision": "defer-scope",
+      "validation": "historical evidence only",
+      "reason": "The cited spot/binary place-then-cancel snippets require a fresh strict compile and perps relevance before inclusion."
+    },
+    {
+      "id": "008",
+      "title": "Margin preview reports sufficient above the account position cap",
+      "decision": "submit-normal",
+      "validation": "fresh SDK quote plus JSDoc check",
+      "reason": "Submit the documentation/preflight boundary only. The pure quote and synthetic cap do not establish a fresh live rejection.",
+      "path": "feedback/008-sdk-preview-margin-ignores-max-position-size.md"
+    },
+    {
+      "id": "009",
+      "title": "listPerpPositions pagination has no stable timestamp tie-breaker",
+      "decision": "defer-reproduction",
+      "validation": "fresh static query check",
+      "reason": "Non-total offset ordering is present, but the reported duplicate/omission was intermittent and not rerun against the indexer. Needs a deterministic snapshot or captured responses."
+    },
+    {
+      "id": "010",
+      "title": "History reads silently return only 20,000 rows for a larger limit",
+      "decision": "defer-reproduction",
+      "validation": "historical live evidence only",
+      "reason": "Needs fresh request/response proof that the current service truncates at 20,000 and a documented completion/truncation contract."
+    },
+    {
+      "id": "011",
+      "title": "Indexer reads accept malformed addresses as empty histories",
+      "decision": "defer-policy",
+      "validation": "historical evidence only",
+      "reason": "Returning no rows for a filter string may be intentional. Confirm input validation promises and reproduce without conflating checksum normalization with authorization."
+    },
+    {
+      "id": "012",
+      "title": "Unified market and funding fields diverge from the promised CCXT conventions",
+      "decision": "defer-contract",
+      "validation": "historical evidence only",
+      "reason": "The SDK's documented per-8-hour convention is not itself wrong. Establish exactly which CCXT compatibility guarantees apply and reproduce missing-field impact."
+    },
+    {
+      "id": "013",
+      "title": "Simple Swap faucet documentation points to a missing route",
+      "decision": "defer-scope",
+      "validation": "historical HTTP observation",
+      "reason": "A spot faucet link/route needs a fresh docs/HTTP check and scope confirmation. The historical 404 is not current evidence."
+    },
+    {
+      "id": "014",
+      "title": "Functions reference incorrectly describes testnet builder codes as disabled",
+      "decision": "defer-scope",
+      "validation": "historical docs/chain comparison",
+      "reason": "Spot deployment cap values can change; needs same-block reads and current documentation, plus scope confirmation."
+    },
+    {
+      "id": "015",
+      "title": "Private review item",
+      "decision": "hold-private",
+      "validation": "saved chain evidence reviewed; no fresh RPC",
+      "reason": "A private contract-policy observation. The saved state does not establish that the relevant limit must apply to the observed path. Do not assert a vulnerability or copy its detailed evidence publicly."
+    },
+    {
+      "id": "016",
+      "title": "Stop-registry default configuration differs from documented deployment values",
+      "decision": "defer-scope",
+      "validation": "historical deployment comparison",
+      "reason": "Spot/default registry values are mutable. No fresh chain comparison performed, and prior mainnet observations do not authorize new mainnet testing."
+    },
+    {
+      "id": "017",
+      "title": "Native sell stops require an extra payment omitted by the function reference",
+      "decision": "defer-scope",
+      "validation": "historical spot simulation",
+      "reason": "A spot/native-payment documentation issue requiring a fresh local simulation and confirmed perps-bounty scope."
+    },
+    {
+      "id": "018",
+      "title": "Pending-order identifier documentation contradicts its registry-local uniqueness",
+      "decision": "defer-reproduction",
+      "validation": "historical receipts and docs",
+      "reason": "Identifier documentation could merit normal feedback, but current wording and same-network/registry receipt provenance must be independently checked."
+    },
+    {
+      "id": "019",
+      "title": "Spot endpoint overrides in .env are captured too late to configure the bots",
+      "decision": "defer-scope",
+      "validation": "fresh initializer test",
+      "reason": "The .env import-order problem reproduces in spot core. Worth normal tooling feedback if adjacent scope is accepted; no major/security impact was established."
+    },
+    {
+      "id": "020",
+      "title": "yield-optimizer reporting command targets a package outside the workspaces",
+      "decision": "defer-scope",
+      "validation": "fresh source/workspace check",
+      "reason": "The analytics workspace command is inconsistent with root workspace patterns. Worth normal documentation feedback if tooling scope is accepted; no new CLI install/run performed."
+    },
+    {
+      "id": "021",
+      "title": "Default starter does not register SIGTERM cleanup",
+      "decision": "defer-scope",
+      "validation": "fresh full starter-body mock test",
+      "reason": "SIGINT cleanup is registered and SIGTERM cleanup is not. Worth normal spot-bot reliability feedback if scope is accepted; no real order was orphaned."
+    },
+    {
+      "id": "022",
+      "title": "Unknown PERP_SIDE values silently select long",
+      "decision": "submit-normal",
+      "validation": "fresh exact declaration test",
+      "reason": "Fail-open handling of invalid configuration reproduces. Downgrade original major proposal: unsupported values and live loss are not an exploit demonstration.",
+      "path": "feedback/022-kit-15-perp-side-typo-silently-long.md"
+    },
+    {
+      "id": "023",
+      "title": "perp-starter accepts percentages that invert or negate bracket prices",
+      "decision": "submit-normal",
+      "validation": "fresh actual arithmetic test",
+      "reason": "Finite but invalid bracket percentages produce inverted/nonpositive prices. Contract acceptance and trigger execution remain untested.",
+      "path": "feedback/023-kit-16-perp-starter-tp-sl-unvalidated-inverted-bracket.md"
+    },
+    {
+      "id": "024",
+      "title": "perp-maker rounds asks down toward or below the mark",
+      "decision": "submit-normal",
+      "validation": "fresh real dry-run placement path",
+      "reason": "The actual maker expression and placement alignment floor a synthetic sell ask below its mark. Strong bounded correctness finding; no live PnL claim.",
+      "path": "feedback/024-kit-20-perp-maker-ask-rounds-down-below-mark.md"
+    },
+    {
+      "id": "025",
+      "title": "edge-analytics maps uppercase and unknown buy-side values to sell",
+      "decision": "defer-scope",
+      "validation": "fresh actual parser test",
+      "reason": "Unknown/uppercase buy values map to sell. Useful normal parser feedback if analytics tooling is in scope; full CSV/markout results were not rerun."
+    },
+    {
+      "id": "026",
+      "title": "Backtest overrides silently accept unknown configuration keys",
+      "decision": "exclude-intended",
+      "validation": "fresh source review",
+      "reason": "The source deliberately allows unknown keys for forward compatibility. Validation/warnings may improve UX, but do not call the existing behavior an accidental bug."
+    },
+    {
+      "id": "027",
+      "title": "edge-analytics rejects fractional Unix-second timestamps",
+      "decision": "defer-scope",
+      "validation": "fresh actual parser test",
+      "reason": "Fractional Unix-second strings fail while integer/ISO controls pass. Confirm supported timestamp grammar and tooling scope before claiming a defect."
+    },
+    {
+      "id": "028",
+      "title": "perp-starter does not react when the protective stop leg disappears",
+      "decision": "submit-normal",
+      "validation": "fresh full strategy-body mock test",
+      "reason": "Submit the missing-leg warning/recovery gap under an explicitly synthetic stop-drop fixture. No live stop-drop mechanism or loss was revalidated.",
+      "path": "feedback/028-maj-kit-01-starter-silent-after-stop-loss-leg-drops.md"
+    },
+    {
+      "id": "029",
+      "title": "perp-guard symbol filtering suppresses account-wide risk reporting",
+      "decision": "exclude-feature-request",
+      "validation": "fresh full strategy-body mock test",
+      "reason": "The configured symbol filter intentionally limits markets. Account-wide warnings may help, but closing an excluded market is not an established correctness requirement."
+    },
+    {
+      "id": "030",
+      "title": "Private review item",
+      "decision": "hold-private",
+      "validation": "fresh actual SDK unsigned encoding recheck",
+      "reason": "A private SDK runtime-validation observation reproduces locally. The inputs are outside the TypeScript union; live acceptance, trigger execution and loss remain unproven. Detailed encoding evidence stays out of this public export."
+    },
+    {
+      "id": "031",
+      "title": "Live fills from different blocks in one second are sorted by log index alone",
+      "decision": "submit-normal",
+      "validation": "fresh actual SDK store test",
+      "reason": "Real recentFills ordering places an older block first for same-second fixtures. Strong bounded SDK correctness finding; historical percentages were removed.",
+      "path": "feedback/031-maj-stream-01-live-tape-order-ignores-block.md"
+    },
+    {
+      "id": "032",
+      "title": "Constant imports retain a large generated GraphQL document map",
+      "decision": "defer-benchmark",
+      "validation": "historical bundler observation",
+      "reason": "Needs a pinned fresh bundler/config/metafile baseline. sideEffects=false alone is not a size guarantee; confirm current advertised expectations."
+    },
+    {
+      "id": "033",
+      "title": "Missing runtime requirements allow unsupported Node installations",
+      "decision": "defer-support-policy",
+      "validation": "package metadata inspected; no old-Node matrix",
+      "reason": "The missing engines field is real metadata, but unsupported/EOL Node behavior is not automatically a defect. Establish the supported runtime/ESM contract."
+    },
+    {
+      "id": "034",
+      "title": "Declared viem peer range includes versions incompatible with SDK declarations",
+      "decision": "defer-compiler-matrix",
+      "validation": "historical compile evidence only",
+      "reason": "A peer-range type mismatch would be useful if reproduced. Only viem 2.24.0 was used here; the claimed 2.18.5/2.23.0 failures were not independently rerun."
+    },
+    {
+      "id": "035",
+      "title": "Documented package subpaths fail under TypeScript node10 resolution",
+      "decision": "exclude-legacy-resolution",
+      "validation": "published exports inspected",
+      "reason": "Legacy node10 resolution ignores exports. Without promised legacy support, modern node16/nodenext/bundler requirements are a documentation concern, not proof the subpaths are broken."
+    },
+    {
+      "id": "036",
+      "title": "MIGRATING.md links to an absent packaged changelog and stale release status",
+      "decision": "exclude-low-value",
+      "validation": "fresh shipped-file check",
+      "reason": "The missing linked changelog is confirmed. Retain as a low-priority packaging suggestion, rather than adding a standalone perps-bounty claim."
+    },
+    {
+      "id": "037",
+      "title": "fromHuman number rounding differs from the documented decimal rounding rule",
+      "decision": "submit-normal",
+      "validation": "fresh actual SDK conversion tests",
+      "reason": "Submit as documentation accuracy: IEEE-754/toFixed behavior is expected, but the stated decimal half-away rule overpromises. Decimal strings are the workaround.",
+      "path": "feedback/037-sdk2-01-fromhuman-number-not-half-away-from-zero.md"
+    },
+    {
+      "id": "038",
+      "title": "Balance and amount helpers silently ignore invalid quantum values",
+      "decision": "submit-normal",
+      "validation": "fresh actual SDK quantum tests",
+      "reason": "Submit as API hardening: bad or unsupported quantum silently disables quantization. Exponent notation is outside the promised decimal-string grammar.",
+      "path": "feedback/038-sdk2-02-floor-ceil-quantum-invalid-silently-ignored.md"
+    }
+  ]
+}

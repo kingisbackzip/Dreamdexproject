@@ -1,0 +1,13 @@
+{
+  "name": "dreamdex-feedback-revalidation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@somnia-chain/markets-sdk": "0.32.1",
+    "viem": "2.24.0"
+  }
+}

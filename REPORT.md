@@ -1,4 +1,6 @@
-# [Major] Stale close quantity can reverse a Perps position
+> Review status — 1 November 2026: this is a legacy local state-model hypothesis, not a deployed-contract reproduction. It is retained for history and is not one of the eight selected Feedback reports. See [REVALIDATION.md](REVALIDATION.md).
+
+# Legacy hypothesis: stale close quantity may reverse a Perps position
 
 ## Summary
 

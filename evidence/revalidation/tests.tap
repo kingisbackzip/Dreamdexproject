@@ -1,0 +1,134 @@
+TAP version 13
+# (node:13) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 004: actual loadEnv stops at nearest file; parent-only control loads root
+ok 1 - 004: actual loadEnv stops at nearest file; parent-only control loads root
+  ---
+  duration_ms: 34.280348
+  type: 'test'
+  ...
+# Subtest: 019: real NETWORKS initializer captures defaults before env update; pre-import control honors overrides
+ok 2 - 019: real NETWORKS initializer captures defaults before env update; pre-import control honors overrides
+  ---
+  duration_ms: 2.334054
+  type: 'test'
+  ...
+# Subtest: 022: actual PERP_SIDE expression maps sell/bear to long; SHORT control stays short
+ok 3 - 022: actual PERP_SIDE expression maps sell/bear to long; SHORT control stays short
+  ---
+  duration_ms: 3.532317
+  type: 'test'
+  ...
+# Subtest: 023: actual envNum accepts bad percentage ranges and actual bracket math inverts prices
+ok 4 - 023: actual envNum accepts bad percentage ranges and actual bracket math inverts prices
+  ---
+  duration_ms: 2.187228
+  type: 'test'
+  ...
+# Subtest: 025: actual toFillSide maps BUY/long/unknown to sell; canonical buy control passes
+ok 5 - 025: actual toFillSide maps BUY/long/unknown to sell; canonical buy control passes
+  ---
+  duration_ms: 1.081952
+  type: 'test'
+  ...
+# Subtest: 027: actual parseTs rejects fractional seconds; integer and ISO controls pass
+ok 6 - 027: actual parseTs rejects fractional seconds; integer and ISO controls pass
+  ---
+  duration_ms: 1.757055
+  type: 'test'
+  ...
+# Subtest: 028: real strategy with synthetic dropped stop logs one armed leg below stop; no fallback close or rearm
+ok 7 - 028: real strategy with synthetic dropped stop logs one armed leg below stop; no fallback close or rearm
+  ---
+  duration_ms: 4.721186
+  type: 'test'
+  ...
+# Subtest: 029: real guard with BTC-only filter hides synthetic ETH health; unfiltered control closes
+ok 8 - 029: real guard with BTC-only filter hides synthetic ETH health; unfiltered control closes
+  ---
+  duration_ms: 4.958225
+  type: 'test'
+  ...
+# (node:14) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: 001 exclusion: missing claim selectors are already explicitly acknowledged in shipped JSDoc
+ok 9 - 001 exclusion: missing claim selectors are already explicitly acknowledged in shipped JSDoc
+  ---
+  duration_ms: 25.258694
+  type: 'test'
+  ...
+# Subtest: 005 exclusion: explicit NETWORK=testnet is preserved; documented no-NETWORK case selects Hideki
+ok 10 - 005 exclusion: explicit NETWORK=testnet is preserved; documented no-NETWORK case selects Hideki
+  ---
+  duration_ms: 2.234458
+  type: 'test'
+  ...
+# Subtest: 008: real margin quote reports sufficient with a synthetic quantity above a separately supplied account cap
+ok 11 - 008: real margin quote reports sufficient with a synthetic quantity above a separately supplied account cap
+  ---
+  duration_ms: 1.389625
+  type: 'test'
+  ...
+# Subtest: 009 hold: shipped offset query uses updatedAt alone without a unique tie breaker
+ok 12 - 009 hold: shipped offset query uses updatedAt alone without a unique tie breaker
+  ---
+  duration_ms: 0.211772
+  type: 'test'
+  ...
+# Subtest: 020 scope hold: documented analytics workspace is outside the root workspace patterns
+ok 13 - 020 scope hold: documented analytics workspace is outside the root workspace patterns
+  ---
+  duration_ms: 0.780278
+  type: 'test'
+  ...
+# Subtest: 021 scope hold: real starter registers SIGINT cleanup but no SIGTERM cleanup
+ok 14 - 021 scope hold: real starter registers SIGINT cleanup but no SIGTERM cleanup
+  ---
+  duration_ms: 33.084478
+  type: 'test'
+  ...
+# Subtest: 024: actual maker ask expression and dry-run placePerp floor a sell below the synthetic mark
+ok 15 - 024: actual maker ask expression and dry-run placePerp floor a sell below the synthetic mark
+  ---
+  duration_ms: 4.600889
+  type: 'test'
+  ...
+# Subtest: 026 exclusion: unknown backtest keys are explicitly allowed for forward compatibility
+ok 16 - 026 exclusion: unknown backtest keys are explicitly allowed for forward compatibility
+  ---
+  duration_ms: 0.166014
+  type: 'test'
+  ...
+# Subtest: 031: actual MaterializerStore recentFills puts an older block first inside one timestamp
+ok 17 - 031: actual MaterializerStore recentFills puts an older block first inside one timestamp
+  ---
+  duration_ms: 0.63844
+  type: 'test'
+  ...
+# Subtest: 036 low-value packaging note: MIGRATING links to an unshipped changelog
+ok 18 - 036 low-value packaging note: MIGRATING links to an unshipped changelog
+  ---
+  duration_ms: 0.405407
+  type: 'test'
+  ...
+# Subtest: 037: actual fromHuman violates the stated decimal half-away rule for five number/string pairs
+ok 19 - 037: actual fromHuman violates the stated decimal half-away rule for five number/string pairs
+  ---
+  duration_ms: 0.436472
+  type: 'test'
+  ...
+# Subtest: 038: actual ceilRawAmount silently returns an off-grid value for unsupported or invalid quantum
+ok 20 - 038: actual ceilRawAmount silently returns an off-grid value for unsupported or invalid quantum
+  ---
+  duration_ms: 1.171324
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 616.417072

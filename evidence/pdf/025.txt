@@ -1,0 +1,49 @@
+Source: dreamdex-perps-feedback-report(1).pdf
+PDF pages: 45-45
+Original item: 25
+Original path: feedback/kit-21-edge-analytics-side-case-flips-verdict.md
+
+edge-analytics counts any side that is not exactly “bid”/“buy” as a sell, so “BUY” or “long” flips the edge verdict
+
+Severity: normal
+Area: app
+
+ Steps to reproduce
+
+   1. cd tools/edge-analytics
+   2. Make a one-fill trade log in the documented csv-logger shape and a mid log (files in evidence/
+      candidates/kit20-23/ea/ ): t_buy.csv / t_BUY.csv / t_long.csv :
+      1730000000,hideki,P,<side>,fill,1,100,1,100,0x, ; m2.csv : mids 100.05 at t0 and t0+1s, 100.30 at
+      t0+10s, 100.50 at t0+60s.
+   3. npx tsx src/index.ts --trades t_<side>.csv --mid m2.csv for each side.
+
+ Expected
+
+BUY and buy give the same report. A side the tool does not recognise ( long , short , blank, a typo) is
+rejected or at least warned about, not silently read as a sell. The README lists only bid/buy and ask/sell.
+Perp bots in this same kit name sides long / short ( packages/perp-core/src/orders.ts:28 ).
+
+ Actual
+
+ == side=buy    captured spread: median 5.00 bps | 60s net +50.0 bps | VERDICT: Positive marked-to-mid edge
+ == side=BUY    captured spread: median -5.00 bps | 60s net -50.0 bps | VERDICT: NEGATIVE EDGE ... change
+ the edge.
+ == side=long   captured spread: median -5.00 bps | 60s net -50.0 bps | VERDICT: NEGATIVE EDGE ... change
+ the edge.
+
+
+toFillSide is s === "bid" || s === "buy" ? "buy" : "sell" . It is case-sensitive and has no error branch,
+so every unknown value becomes a sell, every sign flips, and a profitable maker is told it has negative
+edge (and the reverse) with no warning.
+
+ Evidence
+
+    • tools/edge-analytics/src/csv.ts:73-74, 107 ; README tools/edge-analytics/README.md:89-90 at
+      commit 4e75896896e024c03e2033d5920514f249998cd6.
+    • Output: evidence/candidates/kit20-23/ea-side.log , 2026-10-31 ~03:55 UTC. Run twice, same
+      result.
+
+ Environment
+
+dreamdex-bot-kit commit 4e75896896e024c03e2033d5920514f249998cd6, network Somnia Tokyo
+testnet (Hideki, chain 50383), wallet address: none (read-only, DRY_RUN). Local tool only, no network.

@@ -1,0 +1,66 @@
+Source: dreamdex-perps-feedback-report(1).pdf
+PDF pages: 13-14
+Original item: 4
+Original path: feedback/05-kit-perp-loadenv-ignores-root-env.md
+
+perp-core loadEnv stops at the nearest .env, so a strategy- local .env silently hides the root PRIVATE_KEY / NETWORK / OWNER_ADDRESS
+
+Severity: normal
+Area: SDK
+
+ Steps to reproduce
+
+   1. Use the kit’s documented layout: root .env holds PRIVATE_KEY / NETWORK / OWNER_ADDRESS ; per-
+      strategy knobs go in the strategy’s own .env (docs/getting-started.md:32-33; .env.example:34
+      “Strategy knobs are in each strategy’s own .env.example”).
+   2. Create <root>/.env with NETWORK=testnet and PERP_NOTIONAL_USDSO=20 , and <root>/strategies/perp-
+      starter/.env with PERP_SYMBOL=ETH-PERP .
+   3. From strategies/perp-starter (the cwd npm start -w perp-starter uses), call perp-core
+      loadConfig() ; for comparison call the spot core’s loadEnv() from the same directory (scripts
+      scratch/envtest.ts , scratch/envtest-core.ts ).
+
+
+ Expected
+
+Same behaviour as the spot/EC core ( packages/core/src/env.ts ): every .env from cwd up to the root is
+loaded, nearest wins. perp-core’s own doc comment says the loader exists “so a strategy in strategies/
+picks up the repo-root .env”.
+
+ Actual
+
+perp-core loads only the first .env it finds and returns; the root file is never read:
+
+ perp-core: {"network":"hideki","symbol":"ETH-PERP","PERP_NOTIONAL_USDSO":null}
+ core     : {"NETWORK":"testnet","PERP_SYMBOL":"ETH-PERP","PERP_NOTIONAL_USDSO":"20"}
+
+
+With no error message: root PRIVATE_KEY is ignored (bot runs read-only or fails “PRIVATE_KEY is
+required”), root NETWORK is ignored (falls back to hideki), and in the worst case a root OWNER_ADDRESS is
+dropped while a local PRIVATE_KEY is present, so the bot trades the bot key’s own account instead of the
+linked dreamDEX account.
+
+Scope: the loader behaviour only. The missing per-strategy .env.example files for the perp strategies
+were reported separately by others and are not claimed here.
+
+ Evidence
+
+    • https://github.com/somnia-chain/dreamdex-bot-kit/blob/
+      25798660bbe4674a6f83a960b202852896e2fed4/packages/perp-core/src/config.ts#L33-L47 —
+      doc comment at L33-34 promises the root .env ; L41 if (existsSync(candidate)) return void
+      dotenv({ path: candidate }); returns after the first hit.
+    • https://github.com/somnia-chain/dreamdex-bot-kit/blob/
+      25798660bbe4674a6f83a960b202852896e2fed4/packages/core/src/env.ts#L20-L33 — collects all
+      .env files, loads each with override: false (L32).
+    • Re-verified 2026-10-29 14:54 UTC: main is still 25798660bbe4674a6f83a960b202852896e2fed4
+      (no commits since 2026-10-12); L41 and L32 unchanged. Original run 2026-10-22 04:31 UTC on a
+      fresh worktree ( npm ci , build).
+
+ Suggested fix
+
+Port the spot core’s walk-up loop (load every .env up to the repo root with override: false ) into perp-
+core loadEnv .
+
+ Environment
+
+dreamdex-bot-kit @ 25798660bbe4674a6f83a960b202852896e2fed4, Somnia Tokyo testnet (Hideki,
+chain 50383), wallet: none (read-only, DRY_RUN)

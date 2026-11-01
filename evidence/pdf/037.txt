@@ -1,0 +1,62 @@
+Source: dreamdex-perps-feedback-report(1).pdf
+PDF pages: 60-61
+Original item: 37
+Original path: feedback/sdk2-01-fromhuman-number-not-half-away-from-zero.md
+
+fromHuman() number input does not round half-away-from- zero as its JSDoc says, and disagrees with the same value passed as a string
+
+Severity: normal
+Area: SDK
+
+ Steps to reproduce
+
+   1. Install @somnia-chain/markets-sdk@0.32.1 (no network, no keys needed).
+   2. Read the fromHuman JSDoc in dist/units.d.ts : “A number carrying more fraction digits than
+       decimals is ROUNDED to scale (half-away-from-zero, via toFixed ): fromHuman(0.1234567, 6) is
+       123457n .”
+   3. Run node scripts/sdk2-fromhuman-half.mjs , which calls fromHuman with exact decimal halves as a
+      number and as a string.
+
+ Expected
+
+Half-away-from-zero, as documented: fromHuman(1.005, 2) = 101n , fromHuman(2.675, 2) = 268n ,
+fromHuman(-1.005, 2) = -101n , fromHuman(0.0000005, 6) = 1n , fromHuman(0.00000025, 7) = 3n . The
+number and string forms of the same literal should give the same raw amount.
+
+ Actual
+
+For these inputs the number path rounds toward zero, because Number.prototype.toFixed rounds the
+double’s binary expansion (1.005 is stored as 1.00499999…). The string path, given the same literal,
+rounds half-away-from-zero. So one value typed by a user produces two different raw amounts
+depending on its JS type. 0.0000005 at 6 decimals (half of one raw unit) becomes 0n , so a non-zero
+human amount silently converts to zero.
+
+ Evidence
+
+node scripts/sdk2-fromhuman-half.mjs , run twice with identical output (md5 14ab64ea…), 2026-10-31
+~03:54 UTC. This is a pure function, so no block is involved:
+
+ fromHuman(1.005, 2) = 100n expected(half-away) 101n MISMATCH | fromHuman("1.005", 2) = 101n
+ fromHuman(5e-7, 6) = 0n expected(half-away) 1n MISMATCH | fromHuman("5e-7", 6) = throws
+ InvalidDecimalNumberError
+ fromHuman(2.5e-7, 7) = 2n expected(half-away) 3n MISMATCH | fromHuman("2.5e-7", 7) = throws
+ InvalidDecimalNumberError
+ fromHuman(-1.005, 2) = -100n expected(half-away) -101n MISMATCH | fromHuman("-1.005", 2) = -101n
+ fromHuman(2.675, 2) = 267n expected(half-away) 268n MISMATCH | fromHuman("2.675", 2) = 268n
+ fromHuman(1.0000005, 6) = 1000001n expected(half-away) 1000001n ok | fromHuman("1.0000005", 6) =
+ 1000001n
+ fromHuman(0.0000015, 6) = 2n expected(half-away) 2n ok | fromHuman("0.0000015", 6) = 2n
+
+
+humanToDecimalString ’s own JSDoc says toFixed “prints the float’s binary expansion rather than the
+number the caller wrote”, but the over-precision branch still uses it. Suggested fix: when String(n) is
+plain decimal notation, round that string half-away-from-zero (the string path already does this).
+Otherwise, document the rounding as “toFixed (binary) rounding, not half-away-from-zero”.
+
+This is not the already-reported “string input is rounded, not rejected” issue. That one is about strings.
+This one is about the number path contradicting its stated rounding mode and the string path.
+
+ Environment
+
+SDK version 0.32.1, network Somnia Tokyo testnet (Hideki, chain 50383), wallet address: none (read-
+only)

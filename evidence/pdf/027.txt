@@ -1,0 +1,42 @@
+Source: dreamdex-perps-feedback-report(1).pdf
+PDF pages: 47-47
+Original item: 27
+Original path: feedback/kit-23-edge-analytics-fractional-unix-seconds-crash.md
+
+edge-analytics crashes with a stack trace on fractional unix- second timestamps (e.g. 1730000000.250)
+
+Severity: normal
+Area: app
+
+ Steps to reproduce
+
+   1. cd tools/edge-analytics
+   2. Trade log with ts=1730000000.250 and a mid log with ts in the same format ( evidence/candidates/
+      kit20-23/ea/t.csv , m.csv ).
+   3. npx tsx src/index.ts --trades t.csv --mid m.csv
+
+ Expected
+
+The README says “ ts accepts unix seconds, unix milliseconds, or ISO-8601”. Unix seconds with a
+fractional part (what Python’s time.time() and most pollers write) parse as seconds, or fail with a one-
+line message naming the row.
+
+ Actual
+
+ Error: unparseable timestamp: 1730000000.250
+     at parseTs (…/tools/edge-analytics/src/csv.ts:…)
+
+
+followed by a Node stack trace, exit code 1. parseTs only treats /^\d+$/ as numeric and passes
+everything else to Date.parse , which returns NaN for a decimal number string.
+
+ Evidence
+
+    • tools/edge-analytics/src/csv.ts:24-33 ; tools/edge-analytics/README.md:89 at commit
+      4e75896896e024c03e2033d5920514f249998cd6.
+    • Run at 2026-10-31 03:59:09 UTC (and earlier at ~03:54 UTC), rc=1 both times.
+
+ Environment
+
+dreamdex-bot-kit commit 4e75896896e024c03e2033d5920514f249998cd6, network Somnia Tokyo
+testnet (Hideki, chain 50383), wallet address: none (read-only, DRY_RUN). Local tool only, no network.

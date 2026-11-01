@@ -1,0 +1,4 @@
+PASS: 36 reports; 36 Feedback candidates; 0 private reports in export
+PASS: all required sections, severity/area enums, unique IDs and PDF-page mappings
+PASS: 12 exact upstream Git blob hashes; 174 local Markdown links
+NOTE: this structural check does not validate the live findings, rules, access or acceptance

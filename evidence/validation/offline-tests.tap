@@ -1,0 +1,18 @@
+(node:14) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 004: actual loadEnv stops at nearest file; parent-only control loads root (57.216659ms)
+✔ 019: real NETWORKS initializer captures defaults before env update; pre-import control honors overrides (3.449388ms)
+✔ 022: actual PERP_SIDE expression maps sell/bear to long; SHORT control stays short (5.216649ms)
+✔ 023: actual envNum accepts bad percentage ranges and actual bracket math inverts prices (3.847273ms)
+✔ 025: actual toFillSide maps BUY/long/unknown to sell; canonical buy control passes (1.463955ms)
+✔ 027: actual parseTs rejects fractional seconds; integer and ISO controls pass (2.536694ms)
+✔ 028: real strategy with synthetic dropped stop logs one armed leg below stop; no fallback close or rearm (6.382305ms)
+✔ 029: real guard with BTC-only filter hides synthetic ETH health; unfiltered control closes (5.574206ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 198.388508

@@ -1,0 +1,53 @@
+Source: dreamdex-perps-feedback-report(1).pdf
+PDF pages: 40-40
+Original item: 21
+Original path: feedback/kit-14-starter-ignores-sigterm-orphans-orders.md
+
+starter (the Railway default STRATEGY) only handles SIGINT: a Railway stop/redeploy (SIGTERM) kills it without cancelling its resting orders
+
+Severity: normal
+Area: SDK
+
+ Steps to reproduce
+
+   1. Read strategies/starter/src/index.ts:82-90 : the cancel-on-exit shutdown handler is registered
+      only for SIGINT .
+   2. Deploy per docs/railway.md: .env.railway sets STRATEGY=starter and scripts/railway-start.mjs
+      defaults to starter . Railway stops and redeploys containers with SIGTERM, which railway-start
+      forwards to the child ( scripts/railway-start.mjs , process.on("SIGTERM", () =>
+      forward("SIGTERM")) ).
+   3. Compare: grep -rn "SIGTERM" strategies/*/src/index.ts
+
+ Expected
+
+Like every other strategy (market-making:61, grid:32, twap:34, momentum:37, mean-reversion:37,
+treasury:73, yield-optimizer:78, ensemble:30, all perp bots via packages/perp-core/src/exchange.ts:182 ),
+starter cancels its open orders on SIGTERM. The file header promises “cancel on exit”.
+
+ Actual
+
+starter has no SIGTERM handler, so Node’s default action ends the process immediately and the
+pool.cancel(id) loop never runs. With DRY_RUN=false its live PostOnly quotes stay on the book for up
+to STARTER_EXPIRE_MS (default 1 hour, strategies/starter/src/config.ts:38 ) after every Railway redeploy/
+stop, with nobody managing them. The new container doesn’t know their ids ( openIds lives in memory),
+so it can’t cancel them either and quotes a second set on top. Related, same file: ticks run from
+setInterval ( index.ts:77-80 ) with no in-flight guard, and shutdown doesn’t wait for a running tick. An
+order placed by a tick that’s mid-flight when SIGINT arrives is pushed to openIds after the cancel loop
+has already run, then process.exit(0) leaves it resting.
+
+ Evidence
+
+    • grep -rn "SIGTERM" strategies/*/src/index.ts at commit
+      4e75896896e024c03e2033d5920514f249998cd6 (2026-10-31 02:20 UTC) lists every spot
+      strategy except starter . strategies/starter/src/index.ts:90 is process.on("SIGINT", shutdown);
+      with no SIGTERM line.
+    • .env.railway STRATEGY=starter ; scripts/railway-start.mjs process.env.STRATEGY ?? "starter" and
+      SIGTERM forwarding; strategies/starter/src/config.ts:38
+      expireMs: num("STARTER_EXPIRE_MS", 60 * 60_000) .
+    • Found by reading the code. Not run live (that would need a funded key and real orders).
+
+ Environment
+
+dreamdex-bot-kit commit 4e75896896e024c03e2033d5920514f249998cd6, network Somnia Tokyo
+testnet (Hideki, chain 50383), wallet address: none (read-only, DRY_RUN). The spot starter runs on
+NETWORK=testnet (Shannon) per .env.railway.

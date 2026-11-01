@@ -1,0 +1,62 @@
+[
+  {
+    "path": "evidence/upstream/25798660/packages/perp-core/src/config.ts",
+    "blob_sha": "7365615ef0762267e7b3d95a205181341418b41b",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/25798660bbe4674a6f83a960b202852896e2fed4/packages/perp-core/src/config.ts"
+  },
+  {
+    "path": "evidence/upstream/25798660/strategies/perp-starter/src/index.ts",
+    "blob_sha": "79ea4821c80eb3a712d2b6945b7da68bd6e77aec",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/25798660bbe4674a6f83a960b202852896e2fed4/strategies/perp-starter/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/25798660/LICENSE",
+    "blob_sha": "5fd87616f23ed073aa8c62bd594322057cf3fc49",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/25798660bbe4674a6f83a960b202852896e2fed4/LICENSE"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/perp-core/src/config.ts",
+    "blob_sha": "7365615ef0762267e7b3d95a205181341418b41b",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/perp-core/src/config.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/perp-starter/src/index.ts",
+    "blob_sha": "79ea4821c80eb3a712d2b6945b7da68bd6e77aec",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/perp-starter/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/perp-guard/src/index.ts",
+    "blob_sha": "3a94cc494f259d46af123d0aec4438ffb16234fd",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/perp-guard/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/tools/edge-analytics/src/csv.ts",
+    "blob_sha": "2b0c6fa49957da652ffaa75e2fcae8618ab79d4f",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/tools/edge-analytics/src/csv.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/core/src/config/networks.ts",
+    "blob_sha": "8513f11a0fc59f8818dc367196bc6e3d39331585",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/core/src/config/networks.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/package.json",
+    "blob_sha": "92e3143e268a760c9577d8338a2641ecdfe8aec0",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/package.json"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/grid/src/config.ts",
+    "blob_sha": "93b622eac8413a4475f755c2c8f8772fe46e0ead",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/grid/src/config.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/core/src/index.ts",
+    "blob_sha": "f2dc2150a0455333655c34e68d935f3eb86c1163",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/core/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/LICENSE",
+    "blob_sha": "5fd87616f23ed073aa8c62bd594322057cf3fc49",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/LICENSE"
+  }
+]

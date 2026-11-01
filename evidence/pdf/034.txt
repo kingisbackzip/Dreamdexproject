@@ -1,0 +1,52 @@
+Source: dreamdex-perps-feedback-report(1).pdf
+PDF pages: 57-57
+Original item: 34
+Original path: feedback/pkg-03-viem-peer-range-too-low-for-types.md
+
+peerDependencies allow viem ^2.18.5, but the shipped .d.ts needs viem >=2.24 (SignedAuthorizationList), so tsc fails on viem 2.18–2.23
+
+Severity: normal
+Area: SDK
+
+ Steps to reproduce
+
+   1. npm i @somnia-chain/markets-sdk@0.32.1 viem@2.23.0 typescript@5.9 @types/node@22 . This satisfies
+      the declared peer range viem: ^2.18.5 , and npm reports no peer conflict.
+   2. a.ts : import { SomniaMarkets } from "@somnia-chain/markets-sdk"; export const x = SomniaMarkets;
+   3. npx tsc --noEmit --strict --module nodenext --moduleResolution nodenext a.ts (default
+      skipLibCheck: false ).
+   4. Repeat with viem 2.18.5 and 2.24.0 (script: scripts/pkg-03-viem-peer-types.sh ).
+
+ Expected
+
+Every viem version inside the declared peer range type-checks against the SDK’s declarations, or the
+peer floor is raised to the first version that does.
+
+ Actual
+
+viem 2.18.5 and 2.23.0 fail with TS2694 in the SDK’s own declaration file. viem 2.24.0 and later pass.
+With skipLibCheck: true the build passes, but the authorizationList field silently becomes any . A
+related range mismatch: the optional peer @somnia-chain/reactivity@^0.2.1 (needed for the /reactivity
+subpath) declares viem: ^2.48.2 , so the combined real floor is much higher than the SDK’s ^2.18.5.
+Runtime reads do work on viem 2.18.5; only the types and the reactivity peer are affected.
+
+ Evidence
+
+ == viem 2.18.5
+ node_modules/@somnia-chain/markets-sdk/dist/syncStatus.d.ts(321,43): error TS2694: Namespace '".../viem/
+ _types/index"' has no exported member 'SignedAuthorizationList'.
+ == viem 2.23.0
+ node_modules/@somnia-chain/markets-sdk/dist/syncStatus.d.ts(321,43): error TS2694: ... no exported member
+ 'SignedAuthorizationList'.
+ == viem 2.24.0
+ (no SDK type errors)
+ $ npm view @somnia-chain/markets-sdk@0.32.1 peerDependencies -> viem: '^2.18.5'
+ $ npm view @somnia-chain/reactivity@0.2.1 peerDependencies     -> { viem: '^2.48.2' }
+
+
+Run 2026-10-31 02:20 UTC, TypeScript 5.9.3, Node v22.23.3.
+
+ Environment
+
+SDK version 0.32.1, network Somnia Tokyo testnet (Hideki, chain 50383), wallet address: none (read-
+only)

@@ -1,0 +1,53 @@
+Source: dreamdex-perps-feedback-report(1).pdf
+PDF pages: 22-22
+Original item: 10
+Original path: feedback/11-sdk-limit-silent-20000-cap.md
+
+getFills / listPerpOrderRejections: a limit above 20000 is silently truncated to 20000 with no error or truncation flag
+
+Severity: normal
+Area: SDK
+
+ Steps to reproduce
+
+   1. Run scripts/s19-limit-validation.mjs (read-only). It calls getFills(pool, { limit }) ,
+      listPerpOrderRejections({ limit }) and listPerpPositions(account, { limit }) with limit =
+      50000 , -1 , 1.5 , "5" .
+
+
+ Expected
+
+These behave like listPerpPositionChanges , which throws InvalidInputError("Perp position change page
+limit must be an integer from 1 to 1000") (dist/perp/history.js:532) before any network call. At
+minimum, a limit above the server cap is clamped in a documented way or flagged as truncated.
+
+ Actual
+
+    • limit: 50000 returns exactly 20000 rows with no sign the result was cut ( getFills ,
+      listPerpOrderRejections ). The SDK’s own truncation rule (“ rows.length === limit means
+      truncated”) cannot catch it, because 20000 ≠ 50000. A caller asking for “everything up to
+      50000” silently gets a partial history.
+
+Scope: the silent 20000 cap only. Malformed limits surfacing as IndexerError instead of
+InvalidInputError , the funding-history reads and non-finite limits were reported separately and are not
+claimed here.
+
+ Evidence
+
+Re-run 2026-10-29 14:40 UTC (same results as 2026-10-22 04:38 and 04:41 UTC):
+
+ getFills(limit=50000) -> OK 20000 rows in 1077 ms
+ listPerpOrderRejections(limit=50000) -> OK 20000 rows in 499 ms
+
+
+Raw: evidence/reverify-2026-10-29/s19.log
+
+ Suggested fix
+
+Validate limit as an integer in a documented range and throw InvalidInputError otherwise; document
+the 20000 server cap or clamp to it explicitly and mark the result truncated.
+
+ Environment
+
+@somnia-chain/markets-sdk 0.32.1, Somnia Tokyo testnet (Hideki, chain 50383), wallet: none (read-
+only)

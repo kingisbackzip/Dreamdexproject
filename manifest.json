@@ -1,0 +1,588 @@
+{
+  "source_pdf_sha256": "e6703be8e5036dd6386b14da201e7ce03fccf2b23f65c388dbb2d5086dac38a8",
+  "source_pdf_size_bytes": 239696,
+  "prepared_date": "2026-11-01",
+  "source_item_count": 36,
+  "feedback_candidates": 36,
+  "private_review_items": 0,
+  "reports": [
+    {
+      "id": "001",
+      "source_item": 1,
+      "title": "claimPerpVoucher cannot decode ClaimantNotFlat and ClaimantIsMainFunded",
+      "path": "feedback/001-sdk-claim-errors-not-decoded.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        7,
+        8
+      ],
+      "source_excerpt": "evidence/pdf/001.txt",
+      "original_path": "feedback/01-sdk-claim-errors-not-decoded.md"
+    },
+    {
+      "id": "002",
+      "source_item": 2,
+      "title": "WebSocket getMarkets documentation uses an ignored filter and incorrect response values",
+      "path": "feedback/002-ws-getmarkets-example.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        9,
+        10
+      ],
+      "source_excerpt": "evidence/pdf/002.txt",
+      "original_path": "feedback/03-ws-getmarkets-example.md"
+    },
+    {
+      "id": "003",
+      "source_item": 3,
+      "title": "CCXT adapter lacks documented network limitations and testnet configuration",
+      "path": "feedback/003-ccxt-adapter-mainnet-only.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        11,
+        12
+      ],
+      "source_excerpt": "evidence/pdf/003.txt",
+      "original_path": "feedback/04-ccxt-adapter-mainnet-only.md"
+    },
+    {
+      "id": "004",
+      "source_item": 4,
+      "title": "perp-core stops loading environment files before reaching the repository root",
+      "path": "feedback/004-kit-perp-loadenv-ignores-root-env.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "offline-reproduced-limited",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        13,
+        14
+      ],
+      "source_excerpt": "evidence/pdf/004.txt",
+      "original_path": "feedback/05-kit-perp-loadenv-ignores-root-env.md"
+    },
+    {
+      "id": "005",
+      "source_item": 5,
+      "title": "Railway environment template defeats automatic Hideki selection for perps",
+      "path": "feedback/005-kit-railway-perp-network-testnet.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        15,
+        16
+      ],
+      "source_excerpt": "evidence/pdf/005.txt",
+      "original_path": "feedback/06-kit-railway-perp-network-testnet.md"
+    },
+    {
+      "id": "006",
+      "source_item": 6,
+      "title": "BINARY.md redeem example omits required marketId",
+      "path": "feedback/006-sdk-binary-redeem-doc-wrong-param.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        17,
+        17
+      ],
+      "source_excerpt": "evidence/pdf/006.txt",
+      "original_path": "feedback/07-sdk-binary-redeem-doc-wrong-param.md"
+    },
+    {
+      "id": "007",
+      "source_item": 7,
+      "title": "Place-then-cancel documentation passes an optional orderId without a guard",
+      "path": "feedback/007-sdk-doc-snippets-orderid-optional.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        18,
+        18
+      ],
+      "source_excerpt": "evidence/pdf/007.txt",
+      "original_path": "feedback/08-sdk-doc-snippets-orderid-optional.md"
+    },
+    {
+      "id": "008",
+      "source_item": 8,
+      "title": "Margin preview reports sufficient above the account position cap",
+      "path": "feedback/008-sdk-preview-margin-ignores-max-position-size.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "source_excerpt": "evidence/pdf/008.txt",
+      "original_path": "feedback/09-sdk-preview-margin-ignores-max-position-size.md"
+    },
+    {
+      "id": "009",
+      "source_item": 9,
+      "title": "listPerpPositions pagination has no stable timestamp tie-breaker",
+      "path": "feedback/009-sdk-listperppositions-paging-unstable.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        21,
+        21
+      ],
+      "source_excerpt": "evidence/pdf/009.txt",
+      "original_path": "feedback/10-sdk-listperppositions-paging-unstable.md"
+    },
+    {
+      "id": "010",
+      "source_item": 10,
+      "title": "History reads silently return only 20,000 rows for a larger limit",
+      "path": "feedback/010-sdk-limit-silent-20000-cap.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        22,
+        22
+      ],
+      "source_excerpt": "evidence/pdf/010.txt",
+      "original_path": "feedback/11-sdk-limit-silent-20000-cap.md"
+    },
+    {
+      "id": "011",
+      "source_item": 11,
+      "title": "Indexer reads accept malformed addresses as empty histories",
+      "path": "feedback/011-sdk-indexer-reads-accept-bad-addresses.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        23,
+        23
+      ],
+      "source_excerpt": "evidence/pdf/011.txt",
+      "original_path": "feedback/12-sdk-indexer-reads-accept-bad-addresses.md"
+    },
+    {
+      "id": "012",
+      "source_item": 12,
+      "title": "Unified market and funding fields diverge from the promised CCXT conventions",
+      "path": "feedback/012-sdk-ccxt-market-ticker-field-semantics.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        24,
+        25
+      ],
+      "source_excerpt": "evidence/pdf/012.txt",
+      "original_path": "feedback/13-sdk-ccxt-market-ticker-field-semantics.md"
+    },
+    {
+      "id": "013",
+      "source_item": 13,
+      "title": "Simple Swap faucet documentation points to a missing route",
+      "path": "feedback/013-app-01-simple-debug-faucet-404.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        26,
+        26
+      ],
+      "source_excerpt": "evidence/pdf/013.txt",
+      "original_path": "feedback/app-01-simple-debug-faucet-404.md"
+    },
+    {
+      "id": "014",
+      "source_item": 14,
+      "title": "Functions reference incorrectly describes testnet builder codes as disabled",
+      "path": "feedback/014-app-02-builder-cap-testnet-zero-contradiction.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        27,
+        28
+      ],
+      "source_excerpt": "evidence/pdf/014.txt",
+      "original_path": "feedback/app-02-builder-cap-testnet-zero-contradiction.md"
+    },
+    {
+      "id": "016",
+      "source_item": 16,
+      "title": "Stop-registry default configuration differs from documented deployment values",
+      "path": "feedback/016-doc2-01-spot-stop-registry-defaults-stale.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        31,
+        32
+      ],
+      "source_excerpt": "evidence/pdf/016.txt",
+      "original_path": "feedback/doc2-01-spot-stop-registry-defaults-stale.md"
+    },
+    {
+      "id": "017",
+      "source_item": 17,
+      "title": "Native sell stops require an extra payment omitted by the function reference",
+      "path": "feedback/017-doc2-02-creatependingorder-exact-somi-wrong-for-native-sell.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        33,
+        34
+      ],
+      "source_excerpt": "evidence/pdf/017.txt",
+      "original_path": "feedback/doc2-02-creatependingorder-exact-somi-wrong-for-native-sell.md"
+    },
+    {
+      "id": "018",
+      "source_item": 18,
+      "title": "Pending-order identifier documentation contradicts its registry-local uniqueness",
+      "path": "feedback/018-doc2-03-pending-order-id-globally-unique-contradiction.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        35,
+        36
+      ],
+      "source_excerpt": "evidence/pdf/018.txt",
+      "original_path": "feedback/doc2-03-pending-order-id-globally-unique-contradiction.md"
+    },
+    {
+      "id": "019",
+      "source_item": 19,
+      "title": "Spot endpoint overrides in .env are captured too late to configure the bots",
+      "path": "feedback/019-kit-10-spot-rpc-url-in-env-ignored.md",
+      "severity": "major",
+      "area": "SDK",
+      "validation": "offline-reproduced-limited",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        37,
+        38
+      ],
+      "source_excerpt": "evidence/pdf/019.txt",
+      "original_path": "feedback/kit-10-spot-rpc-url-in-env-ignored.md"
+    },
+    {
+      "id": "020",
+      "source_item": 20,
+      "title": "yield-optimizer reporting command targets a package outside the workspaces",
+      "path": "feedback/020-kit-13-yield-optimizer-edge-analytics-command-fails.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        39,
+        39
+      ],
+      "source_excerpt": "evidence/pdf/020.txt",
+      "original_path": "feedback/kit-13-yield-optimizer-edge-analytics-command-fails.md"
+    },
+    {
+      "id": "021",
+      "source_item": 21,
+      "title": "Default starter does not register SIGTERM cleanup",
+      "path": "feedback/021-kit-14-starter-ignores-sigterm-orphans-orders.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        40,
+        40
+      ],
+      "source_excerpt": "evidence/pdf/021.txt",
+      "original_path": "feedback/kit-14-starter-ignores-sigterm-orphans-orders.md"
+    },
+    {
+      "id": "022",
+      "source_item": 22,
+      "title": "Unknown PERP_SIDE values silently select long",
+      "path": "feedback/022-kit-15-perp-side-typo-silently-long.md",
+      "severity": "major",
+      "area": "SDK",
+      "validation": "offline-reproduced-limited",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        41,
+        41
+      ],
+      "source_excerpt": "evidence/pdf/022.txt",
+      "original_path": "feedback/kit-15-perp-side-typo-silently-long.md"
+    },
+    {
+      "id": "023",
+      "source_item": 23,
+      "title": "perp-starter accepts percentages that invert or negate bracket prices",
+      "path": "feedback/023-kit-16-perp-starter-tp-sl-unvalidated-inverted-bracket.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "offline-reproduced-limited",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        42,
+        42
+      ],
+      "source_excerpt": "evidence/pdf/023.txt",
+      "original_path": "feedback/kit-16-perp-starter-tp-sl-unvalidated-inverted-bracket.md"
+    },
+    {
+      "id": "024",
+      "source_item": 24,
+      "title": "perp-maker rounds asks down toward or below the mark",
+      "path": "feedback/024-kit-20-perp-maker-ask-rounds-down-below-mark.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        43,
+        44
+      ],
+      "source_excerpt": "evidence/pdf/024.txt",
+      "original_path": "feedback/kit-20-perp-maker-ask-rounds-down-below-mark.md"
+    },
+    {
+      "id": "025",
+      "source_item": 25,
+      "title": "edge-analytics maps uppercase and unknown buy-side values to sell",
+      "path": "feedback/025-kit-21-edge-analytics-side-case-flips-verdict.md",
+      "severity": "normal",
+      "area": "app",
+      "validation": "offline-reproduced-limited",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        45,
+        45
+      ],
+      "source_excerpt": "evidence/pdf/025.txt",
+      "original_path": "feedback/kit-21-edge-analytics-side-case-flips-verdict.md"
+    },
+    {
+      "id": "026",
+      "source_item": 26,
+      "title": "Backtest overrides silently accept unknown configuration keys",
+      "path": "feedback/026-kit-22-backtest-set-unknown-key-silently-ignored.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        46,
+        46
+      ],
+      "source_excerpt": "evidence/pdf/026.txt",
+      "original_path": "feedback/kit-22-backtest-set-unknown-key-silently-ignored.md"
+    },
+    {
+      "id": "027",
+      "source_item": 27,
+      "title": "edge-analytics rejects fractional Unix-second timestamps",
+      "path": "feedback/027-kit-23-edge-analytics-fractional-unix-seconds-crash.md",
+      "severity": "normal",
+      "area": "app",
+      "validation": "offline-reproduced-limited",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        47,
+        47
+      ],
+      "source_excerpt": "evidence/pdf/027.txt",
+      "original_path": "feedback/kit-23-edge-analytics-fractional-unix-seconds-crash.md"
+    },
+    {
+      "id": "028",
+      "source_item": 28,
+      "title": "perp-starter does not react when the protective stop leg disappears",
+      "path": "feedback/028-maj-kit-01-starter-silent-after-stop-loss-leg-drops.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "offline-reproduced-limited",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        48,
+        49
+      ],
+      "source_excerpt": "evidence/pdf/028.txt",
+      "original_path": "feedback/maj-kit-01-starter-silent-after-stop-loss-leg-drops.md"
+    },
+    {
+      "id": "029",
+      "source_item": 29,
+      "title": "perp-guard symbol filtering suppresses account-wide risk reporting",
+      "path": "feedback/029-maj-kit-02-guard-symbol-set-silently-ignores-cross-margin-risk.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "offline-reproduced-limited",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        50,
+        50
+      ],
+      "source_excerpt": "evidence/pdf/029.txt",
+      "original_path": "feedback/maj-kit-02-guard-symbol-set-silently-ignores-cross-margin-risk.md"
+    },
+    {
+      "id": "031",
+      "source_item": 31,
+      "title": "Live fills from different blocks in one second are sorted by log index alone",
+      "path": "feedback/031-maj-stream-01-live-tape-order-ignores-block.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        53,
+        54
+      ],
+      "source_excerpt": "evidence/pdf/031.txt",
+      "original_path": "feedback/maj-stream-01-live-tape-order-ignores-block.md"
+    },
+    {
+      "id": "032",
+      "source_item": 32,
+      "title": "Constant imports retain a large generated GraphQL document map",
+      "path": "feedback/032-pkg-01-treeshake-constant-pulls-graphql-map.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        55,
+        55
+      ],
+      "source_excerpt": "evidence/pdf/032.txt",
+      "original_path": "feedback/pkg-01-treeshake-constant-pulls-graphql-map.md"
+    },
+    {
+      "id": "033",
+      "source_item": 33,
+      "title": "Missing runtime requirements allow unsupported Node installations",
+      "path": "feedback/033-pkg-02-no-engines-node18-crash.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        56,
+        56
+      ],
+      "source_excerpt": "evidence/pdf/033.txt",
+      "original_path": "feedback/pkg-02-no-engines-node18-crash.md"
+    },
+    {
+      "id": "034",
+      "source_item": 34,
+      "title": "Declared viem peer range includes versions incompatible with SDK declarations",
+      "path": "feedback/034-pkg-03-viem-peer-range-too-low-for-types.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        57,
+        57
+      ],
+      "source_excerpt": "evidence/pdf/034.txt",
+      "original_path": "feedback/pkg-03-viem-peer-range-too-low-for-types.md"
+    },
+    {
+      "id": "035",
+      "source_item": 35,
+      "title": "Documented package subpaths fail under TypeScript node10 resolution",
+      "path": "feedback/035-pkg-04-subpath-types-unresolvable-module-commonjs.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        58,
+        58
+      ],
+      "source_excerpt": "evidence/pdf/035.txt",
+      "original_path": "feedback/pkg-04-subpath-types-unresolvable-module-commonjs.md"
+    },
+    {
+      "id": "036",
+      "source_item": 36,
+      "title": "MIGRATING.md links to an absent packaged changelog and stale release status",
+      "path": "feedback/036-pkg-05-migrating-links-missing-changelog.md",
+      "severity": "normal",
+      "area": "docs",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        59,
+        59
+      ],
+      "source_excerpt": "evidence/pdf/036.txt",
+      "original_path": "feedback/pkg-05-migrating-links-missing-changelog.md"
+    },
+    {
+      "id": "037",
+      "source_item": 37,
+      "title": "fromHuman number rounding differs from the documented decimal rounding rule",
+      "path": "feedback/037-sdk2-01-fromhuman-number-not-half-away-from-zero.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        60,
+        61
+      ],
+      "source_excerpt": "evidence/pdf/037.txt",
+      "original_path": "feedback/sdk2-01-fromhuman-number-not-half-away-from-zero.md"
+    },
+    {
+      "id": "038",
+      "source_item": 38,
+      "title": "Balance and amount helpers silently ignore invalid quantum values",
+      "path": "feedback/038-sdk2-02-floor-ceil-quantum-invalid-silently-ignored.md",
+      "severity": "normal",
+      "area": "SDK",
+      "validation": "supplied-evidence-only",
+      "disclosure": "feedback-candidate",
+      "pdf_pages": [
+        62,
+        63
+      ],
+      "source_excerpt": "evidence/pdf/038.txt",
+      "original_path": "feedback/sdk2-02-floor-ceil-quantum-invalid-silently-ignored.md"
+    }
+  ],
+  "package_kind": "public-feedback",
+  "source_document_item_count": 38
+}

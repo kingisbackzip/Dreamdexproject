@@ -1,0 +1,127 @@
+[
+  {
+    "path": "evidence/upstream/25798660/LICENSE",
+    "blob_sha": "5fd87616f23ed073aa8c62bd594322057cf3fc49",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/25798660bbe4674a6f83a960b202852896e2fed4/LICENSE"
+  },
+  {
+    "path": "evidence/upstream/25798660/packages/perp-core/src/config.ts",
+    "blob_sha": "7365615ef0762267e7b3d95a205181341418b41b",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/25798660bbe4674a6f83a960b202852896e2fed4/packages/perp-core/src/config.ts"
+  },
+  {
+    "path": "evidence/upstream/25798660/strategies/perp-starter/src/index.ts",
+    "blob_sha": "79ea4821c80eb3a712d2b6945b7da68bd6e77aec",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/25798660bbe4674a6f83a960b202852896e2fed4/strategies/perp-starter/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/.env.railway",
+    "blob_sha": "ad35a2ad6c8fecaaab1424b142818038b35b662b",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/.env.railway"
+  },
+  {
+    "path": "evidence/upstream/4e758968/Dockerfile",
+    "blob_sha": "347a8102014936edcf2fb39e18d008bd83be2627",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/Dockerfile"
+  },
+  {
+    "path": "evidence/upstream/4e758968/LICENSE",
+    "blob_sha": "5fd87616f23ed073aa8c62bd594322057cf3fc49",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/LICENSE"
+  },
+  {
+    "path": "evidence/upstream/4e758968/docs/perps.md",
+    "blob_sha": "b8a26bc116a98227dad8a24a691410d3089fef74",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/docs/perps.md"
+  },
+  {
+    "path": "evidence/upstream/4e758968/docs/railway.md",
+    "blob_sha": "b3c6a8d385f97226fcb13ca458d2364c37460f44",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/docs/railway.md"
+  },
+  {
+    "path": "evidence/upstream/4e758968/package.json",
+    "blob_sha": "92e3143e268a760c9577d8338a2641ecdfe8aec0",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/package.json"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/backtest/src/config-overrides.ts",
+    "blob_sha": "a1f69c7ccb814780bbc1c1136d228ef46c8d2bbb",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/backtest/src/config-overrides.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/core/src/config/networks.ts",
+    "blob_sha": "8513f11a0fc59f8818dc367196bc6e3d39331585",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/core/src/config/networks.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/core/src/index.ts",
+    "blob_sha": "f2dc2150a0455333655c34e68d935f3eb86c1163",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/core/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/perp-core/src/config.ts",
+    "blob_sha": "7365615ef0762267e7b3d95a205181341418b41b",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/perp-core/src/config.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/perp-core/src/markets.ts",
+    "blob_sha": "1fdf48cffd36af66b7914fc76f440092fcfc516a",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/perp-core/src/markets.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/packages/perp-core/src/orders.ts",
+    "blob_sha": "634eedd2e4cbb2bffed792f83e054e37e9c004d3",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/packages/perp-core/src/orders.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/scripts/railway-start.mjs",
+    "blob_sha": "0f02bd665e5b09c89e2fe8c5d3ef8f814ee6e18b",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/scripts/railway-start.mjs"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/grid/src/config.ts",
+    "blob_sha": "93b622eac8413a4475f755c2c8f8772fe46e0ead",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/grid/src/config.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/perp-guard/src/index.ts",
+    "blob_sha": "3a94cc494f259d46af123d0aec4438ffb16234fd",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/perp-guard/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/perp-maker/src/index.ts",
+    "blob_sha": "56787b652fbbaee5cee7d78ec43935fb24dba107",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/perp-maker/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/perp-starter/src/index.ts",
+    "blob_sha": "79ea4821c80eb3a712d2b6945b7da68bd6e77aec",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/perp-starter/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/starter/src/config.ts",
+    "blob_sha": "fbc2d094ed208e1b4965d3c8c804ab2bfc2874f4",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/starter/src/config.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/starter/src/index.ts",
+    "blob_sha": "877330241cad852603bf34deb8d79edfe844862a",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/starter/src/index.ts"
+  },
+  {
+    "path": "evidence/upstream/4e758968/strategies/yield-optimizer/README.md",
+    "blob_sha": "ec522866f05469a28deb37304c052ce423afdfe6",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/strategies/yield-optimizer/README.md"
+  },
+  {
+    "path": "evidence/upstream/4e758968/tools/edge-analytics/package.json",
+    "blob_sha": "45007b11c4f36a05fe4e52d00a8d8b3d067500b2",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/tools/edge-analytics/package.json"
+  },
+  {
+    "path": "evidence/upstream/4e758968/tools/edge-analytics/src/csv.ts",
+    "blob_sha": "2b0c6fa49957da652ffaa75e2fcae8618ab79d4f",
+    "url": "https://github.com/somnia-chain/dreamdex-bot-kit/blob/4e75896896e024c03e2033d5920514f249998cd6/tools/edge-analytics/src/csv.ts"
+  }
+]

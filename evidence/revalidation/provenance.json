@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-11-01T15:04:15.816674+00:00",
+  "source_commit": "1187c9174f73321b28917f8e7aa8854172ddc728",
+  "upstream_head_observed": "4e75896896e024c03e2033d5920514f249998cd6",
+  "node": "v24.22.1",
+  "sdk_version": "0.32.1",
+  "viem_version": "2.24.0",
+  "installation": "pre-existing installation; bytes checked against cached npm tarball",
+  "sdk_integrity": "sha512-RfshQP8X6m/wrE6TocmiOPajbw/Vstmkvn+AP/ztK19QgcrPn1lR7A4Pp8xVm6MuOXOpBwTBrFO0W34neQF0Og==",
+  "sdk_resolved": "https://registry.npmjs.org/@somnia-chain/markets-sdk/-/markets-sdk-0.32.1.tgz",
+  "sdk_package_files_matched": 632,
+  "sdk_relevant_file_sha256": {
+    "dist/store.js": "983227e57fe5c7e21c6f8658f1dbd7c8b0118f2678972774357b88f5d31ced31",
+    "dist/units.js": "6a5d918bd5b286c4fc276bf06cb8e25820850a37e1d24714d9275f1e1abd939f",
+    "dist/perp/margin.js": "fe66170f8f68f4210b4e76fc4ca2209d438349910e104e859a0a405219c7bfbc",
+    "dist/perp/state.js": "069cd78c317c38bba3c905df8c6d51ad956eb20611b5e9ccfc0aceae971fed20",
+    "dist/contractErrorsAbi.js": "9b9280690646d86bffe9c871bcad55558032d493c964d626532550d8a3ff17e5",
+    "dist/trade.d.ts": "8d592eea1604f912de6794beb614439324eef1a70d65201d87e4f53d209dceb0",
+    "dist/somniaMarketsClient.d.ts": "5254c766d22d20a9066623b319b2dcfc77f4d0278015f2b9396b05128037426b"
+  },
+  "public_tests": 20,
+  "public_tests_passed": 20,
+  "network_calls_in_public_checks": 0,
+  "signers_created": 0,
+  "transactions_sent": 0,
+  "legacy_test_suite_rerun": false,
+  "exhaustive_duplicate_sweep": false,
+  "official_event_submission": false
+}

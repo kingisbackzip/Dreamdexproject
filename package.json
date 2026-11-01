@@ -6,7 +6,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "check": "npm run typecheck && npm test"
+    "check": "npm run typecheck && npm test",
+    "test:feedback": "node --test scripts/reproduce-offline.mjs scripts/revalidate-selected.mjs",
+    "check:feedback": "python3 scripts/validate-feedback.py && npm run test:feedback"
   },
   "keywords": [
     "dreamdex",
